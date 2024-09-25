@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -44,4 +45,21 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    // Relación uno a muchos
+    public function clientes(): HasMany
+    {
+        return $this->hasMany(Cliente::class);
+    }
+
+    public function tramites(): HasMany
+    {
+        return $this->hasMany(Tramite::class);
+    }
+
+    public function bitacoras(): HasMany
+    {
+        return $this->hasMany(Bitacora::class);
+    }
+
 }
