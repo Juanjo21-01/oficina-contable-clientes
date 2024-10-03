@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html :class="{ 'dark': darkMode }" x-data="data()" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -8,42 +8,108 @@
 
     <title>Oficina Contable AFC</title>
 
+    <!-- Icon -->
+    <link rel="icon" href="{{ asset('img/icono.png') }}" type="image/png">
+
     <!-- Fonts -->
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script>
+        function data() {
+            function getThemeFromLocalStorage() {
+                if (window.localStorage.getItem("dark")) {
+                    return JSON.parse(window.localStorage.getItem("dark"));
+                }
+                return (
+                    !!window.matchMedia &&
+                    window.matchMedia("(prefers-color-scheme: dark)").matches
+                );
+            }
+
+            function setThemeToLocalStorage(value) {
+                window.localStorage.setItem("dark", value);
+            }
+
+            return {
+                darkMode: getThemeFromLocalStorage(),
+                toggleTheme() {
+                    this.darkMode = !this.darkMode;
+                    setThemeToLocalStorage(this.darkMode);
+                },
+                isSideMenuOpen: false,
+                toggleSideMenu() {
+                    this.isSideMenuOpen = !this.isSideMenuOpen;
+                },
+                closeSideMenu() {
+                    this.isSideMenuOpen = false;
+                },
+                isProfileMenuOpen: false,
+                toggleProfileMenu() {
+                    this.isProfileMenuOpen = !this.isProfileMenuOpen;
+                },
+                closeProfileMenu() {
+                    this.isProfileMenuOpen = false;
+                },
+                isPagesMenuOpen: false,
+                togglePagesMenu() {
+                    this.isPagesMenuOpen = !this.isPagesMenuOpen;
+                },
+                isPagesMenuUsuariosOpen: false,
+                togglePagesMenuUsuarios() {
+                    this.isPagesMenuUsuariosOpen = !this.isPagesMenuUsuariosOpen;
+                },
+                isPagesMenuTramitesOpen: false,
+                togglePagesMenuTramites() {
+                    this.isPagesMenuTramitesOpen = !this.isPagesMenuTramitesOpen;
+                },
+                isPagesMenuClientesOpen: false,
+                togglePagesMenuClientes() {
+                    this.isPagesMenuClientesOpen = !this.isPagesMenuClientesOpen;
+                },
+                isModalOpen: false,
+                trapCleanup: null,
+                openModal() {
+                    this.isModalOpen = true;
+                    this.trapCleanup = focusTrap(document.querySelector("#modal"));
+                },
+                closeModal() {
+                    this.isModalOpen = false;
+                    this.trapCleanup();
+                },
+            };
+        }
+    </script>
 </head>
 
-<body class="antialiased">
-    {{-- <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
-        @if (Route::has('login'))
-            <livewire:welcome.navigation />
-        @endif
-    </header> --}}
+<body>
+    <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+        <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
+            <div class="flex flex-col overflow-y-auto md:flex-row">
 
-    <div class="flex h-screen bg-gray-100">
-        <!-- Imagen del lado izquierdo -->
-        <div class="w-1/2 bg-cover" style="background-image: url('/img/fondo-login.jpeg');"></div>
-
-        <!-- Formulario del lado derecho -->
-        <div class="w-1/2 flex flex-col justify-center items-center bg-white p-8">
-            <div class="w-full max-w-md">
-                <!-- Logotipo -->
-                <div class="mb-4 text-center">
-                    <img src="/img/logo.png" alt="Logo AFC" class="w-32 mx-auto">
-                    <h2 class="text-3xl font-bold mt-2">Iniciar Sesión</h2>
+                <!-- Imagen del lado izquierdo -->
+                <div class="h-32 md:h-auto md:w-1/2">
+                    <img aria-hidden="true" class="object-cover w-full h-full" src="/img/fondo-login.jpeg"
+                        alt="Fondo Inicio de Sesión" />
                 </div>
 
-                <!-- Formulario de inicio de sesión -->
-                <div
-                    class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-                    {{ $slot }}
+                <!-- Formulario del lado derecho -->
+                <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+                    <div class="w-full">
+                        <!-- Logotipo -->
+                        <div class="mb-3 text-center">
+                            <img src="/img/logo.png" alt="Logo AFC" class="w-40 mx-auto mb-3">
+                        </div>
+
+                        <!-- Formulario de inicio de sesión -->
+                        <div class="w-full sm:max-w-md mt-6 px-6 py-4 overflow-hidden sm:rounded-lg">
+                            {{ $slot }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
 </body>
 
 </html>

@@ -15,8 +15,13 @@ new class extends Component {
     }
 }; ?>
 
-<aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
-    <!-- Desktop sidebar -->
+<aside class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto bg-white dark:bg-gray-800 md:hidden"
+    x-show="isSideMenuOpen" x-transition:enter="transition ease-in-out duration-150"
+    x-transition:enter-start="opacity-0 transform -translate-x-20" x-transition:enter-end="opacity-100"
+    x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0 transform -translate-x-20" @click.away="closeSideMenu"
+    @keydown.escape="closeSideMenu">
+    <!-- Mobile sidebar -->
     <div class="py-4 text-zinc-500 dark:text-zinc-400">
         <!-- Logo -->
         <a wire:navigate href="{{ route('dashboard') }}">
@@ -29,7 +34,7 @@ new class extends Component {
                     <span class="absolute inset-y-0 left-0 w-1 bg-teal-600 rounded-tr-lg rounded-br-lg"
                         aria-hidden="true"></span>
                 @endif
-                <a class="inline-flex items-center w-full text-base transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('dashboard') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
+                <a class="inline-flex items-center w-full text-sm transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('dashboard') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
                     href="{{ route('dashboard') }}" wire:navigate>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
@@ -50,7 +55,7 @@ new class extends Component {
                         aria-hidden="true"></span>
                 @endif
                 <button
-                    class="inline-flex items-center justify-between w-full text-base transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('dashboard') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
+                    class="inline-flex items-center justify-between w-full text-sm transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('dashboard') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
                     @click="togglePagesMenuUsuarios" aria-haspopup="true">
                     <span class="inline-flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -75,7 +80,7 @@ new class extends Component {
                         aria-label="submenu">
                         <li
                             class="px-2 py-1 transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200">
-                            <a class="inline-flex items-center w-full text-base font-semibold transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200"
+                            <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200"
                                 href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -107,7 +112,7 @@ new class extends Component {
                         aria-hidden="true"></span>
                 @endif
                 <button
-                    class="inline-flex items-center justify-between w-full text-base transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('dashboard') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
+                    class="inline-flex items-center justify-between w-full text-sm transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('dashboard') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
                     @click="togglePagesMenuTramites" aria-haspopup="true">
                     <span class="inline-flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -166,7 +171,7 @@ new class extends Component {
                         aria-hidden="true"></span>
                 @endif
                 <button
-                    class="inline-flex items-center justify-between w-full text-base transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('dashboard') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
+                    class="inline-flex items-center justify-between w-full text-sm transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('dashboard') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
                     @click="togglePagesMenuClientes" aria-haspopup="true">
                     <span class="inline-flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -223,7 +228,7 @@ new class extends Component {
                         aria-hidden="true"></span>
                 @endif
                 <button
-                    class="inline-flex items-center justify-between w-full text-base transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('dashboard') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
+                    class="inline-flex items-center justify-between w-full text-sm transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('dashboard') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
                     @click="togglePagesMenu" aria-haspopup="true">
                     <span class="inline-flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -294,7 +299,7 @@ new class extends Component {
                     <span class="absolute inset-y-0 left-0 w-1 bg-teal-600 rounded-tr-lg rounded-br-lg"
                         aria-hidden="true"></span>
                 @endif
-                <a class="inline-flex items-center w-full text-base transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('dashboard') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
+                <a class="inline-flex items-center w-full text-sm transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('dashboard') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
                     href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">

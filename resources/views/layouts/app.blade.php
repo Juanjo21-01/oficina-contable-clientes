@@ -1,34 +1,109 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html :class="{ 'dark': darkMode }" x-data="data()" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-        <title>Oficina Contable AFC - </title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Fonts -->
+    <title>Oficina Contable AFC {{ $metaTitle ?? '' }}</title>
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <livewire:layout.navigation />
+    <!-- Icon -->
+    <link rel="icon" href="{{ asset('img/icono.png') }}" type="image/png">
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+    <!-- Fonts -->
 
-            <!-- Page Content -->
-            <main>
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script>
+        function data() {
+            function getThemeFromLocalStorage() {
+                if (window.localStorage.getItem("dark")) {
+                    return JSON.parse(window.localStorage.getItem("dark"));
+                }
+                return (
+                    !!window.matchMedia &&
+                    window.matchMedia("(prefers-color-scheme: dark)").matches
+                );
+            }
+
+            function setThemeToLocalStorage(value) {
+                window.localStorage.setItem("dark", value);
+            }
+
+            return {
+                darkMode: getThemeFromLocalStorage(),
+                toggleTheme() {
+                    this.darkMode = !this.darkMode;
+                    setThemeToLocalStorage(this.darkMode);
+                },
+                isSideMenuOpen: false,
+                toggleSideMenu() {
+                    this.isSideMenuOpen = !this.isSideMenuOpen;
+                },
+                closeSideMenu() {
+                    this.isSideMenuOpen = false;
+                },
+                isProfileMenuOpen: false,
+                toggleProfileMenu() {
+                    this.isProfileMenuOpen = !this.isProfileMenuOpen;
+                },
+                closeProfileMenu() {
+                    this.isProfileMenuOpen = false;
+                },
+                isPagesMenuOpen: false,
+                togglePagesMenu() {
+                    this.isPagesMenuOpen = !this.isPagesMenuOpen;
+                },
+                isPagesMenuUsuariosOpen: false,
+                togglePagesMenuUsuarios() {
+                    this.isPagesMenuUsuariosOpen = !this.isPagesMenuUsuariosOpen;
+                },
+                isPagesMenuTramitesOpen: false,
+                togglePagesMenuTramites() {
+                    this.isPagesMenuTramitesOpen = !this.isPagesMenuTramitesOpen;
+                },
+                isPagesMenuClientesOpen: false,
+                togglePagesMenuClientes() {
+                    this.isPagesMenuClientesOpen = !this.isPagesMenuClientesOpen;
+                },
+                isModalOpen: false,
+                trapCleanup: null,
+                openModal() {
+                    this.isModalOpen = true;
+                    this.trapCleanup = focusTrap(document.querySelector("#modal"));
+                },
+                closeModal() {
+                    this.isModalOpen = false;
+                    this.trapCleanup();
+                },
+            };
+        }
+    </script>
+</head>
+
+<body>
+    <div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
+        <!-- Navegación -->
+        <livewire:layout.navigation />
+        <!-- Backdrop -->
+        <div x-show="isSideMenuOpen" x-transition:enter="transition ease-in-out duration-150"
+            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="fixed inset-0 z-10 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center"></div>
+        <livewire:layout.navigationMobile />
+
+        <div class="flex flex-col flex-1 w-full">
+            <!-- Encabezado -->
+            <livewire:layout.header />
+
+            <!-- Contenido -->
+            <main class="h-full overflow-y-auto">
                 {{ $slot }}
             </main>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>
