@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Roles;
 
 const AUTH = 'auth';
 
@@ -18,8 +19,11 @@ Route::view('profile', 'profile')
 // RUTAS PROTEGIDAS
 Route::middleware(AUTH)->group(function () {
     // Roles
+    Route::view('roles', 'roles')->name('roles');
 
-
+    // Usuarios
+    Route::view('usuarios', 'usuarios.index')->name('usuarios.index');
+    Route::view('usuarios/{id}', 'usuarios.mostrar')->name('usuarios.mostrar');
 });
 
 require __DIR__.'/auth.php';

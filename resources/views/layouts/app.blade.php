@@ -100,7 +100,9 @@
 
             <!-- Contenido -->
             <main class="h-full overflow-y-auto">
-                {{ $slot }}
+                <div class="container px-6 mx-auto">
+                    {{ $slot }}
+                </div>
             </main>
         </div>
     </div>

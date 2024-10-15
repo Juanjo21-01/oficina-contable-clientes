@@ -50,12 +50,12 @@ new class extends Component {
         <ul>
             {{-- Usuarios --}}
             <li class="relative px-6 py-3">
-                @if (request()->routeIs('dashboard'))
+                @if (request()->routeIs('roles'))
                     <span class="absolute inset-y-0 left-0 w-1 bg-teal-600 rounded-tr-lg rounded-br-lg"
                         aria-hidden="true"></span>
                 @endif
                 <button
-                    class="inline-flex items-center justify-between w-full text-sm transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('dashboard') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
+                    class="inline-flex items-center justify-between w-full text-sm transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('roles') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
                     @click="togglePagesMenuUsuarios" aria-haspopup="true">
                     <span class="inline-flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -80,8 +80,8 @@ new class extends Component {
                         aria-label="submenu">
                         <li
                             class="px-2 py-1 transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200">
-                            <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200"
-                                href="#">
+                            <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('roles') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
+                                href="{{ route('roles') }}" wire:navigate>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
