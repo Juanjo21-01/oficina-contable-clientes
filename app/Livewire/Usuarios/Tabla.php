@@ -87,6 +87,32 @@ class Tabla extends Component
         $this->resetErrorBag($field);
     }
 
+    // Cambiar estado
+    public function cambiarEstado($usuarioId)
+    {
+        // Buscar usuario
+        $usuario = User::find($usuarioId);
+
+        // Verificar si el usuario tiene el rol de administrador
+        if ($usuario->role->nombre == 'Administrador') {
+            toastr()->addError('¡No puedes cambiar el estado de un administrador!', [
+                'positionClass' => 'toast-bottom-right',
+                'closeButton' => true,
+            ]);
+            return;
+        }
+
+        // Cambiar estado
+        $usuario->estado = !$usuario->estado;
+        $usuario->save();
+
+        // Mostrar mensaje
+        toastr()->addSuccess('¡Estado actualizado!', [
+            'positionClass' => 'toast-bottom-right',
+            'closeButton' => true,
+        ]);
+    }
+
     public function render()
     {
         $this->usuarios = User::all();

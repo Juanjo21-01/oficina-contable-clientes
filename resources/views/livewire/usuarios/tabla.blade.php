@@ -29,7 +29,8 @@
                         <th class="px-4 py-3 w-1/12">No.</th>
                         <th class="px-4 py-3 w-3/12">Nombres</th>
                         <th class="px-4 py-3 w-3/12">Correo Electrónico</th>
-                        <th class="px-4 py-3 w-3/12">Rol</th>
+                        <th class="px-4 py-3 w-2/12">Rol</th>
+                        <th class="px-4 py-3 w-1/12">Estado</th>
                         <th class="px-4 py-3 w-2/12">Acciones</th>
                     </tr>
                 </thead>
@@ -41,7 +42,12 @@
                             <td class="px-4 py-3 font-semibold w-3/12">{{ $usuario->nombres }} {{ $usuario->apellidos }}
                             </td>
                             <td class="px-4 py-3 font-semibold w-3/12">{{ $usuario->email }}</td>
-                            <td class="px-4 py-3 font-semibold w-3/12">{{ $usuario->role->nombre }}</td>
+                            <td class="px-4 py-3 font-semibold w-2/12">{{ $usuario->role->nombre }}</td>
+                            <td class="px-4 py-3 w-1/12">
+                                <button wire:click="cambiarEstado({{ $usuario->id }})"
+                                    class="px-4 py-2 font-semibold leading-tight rounded-full {{ $usuario->estado == 1 ? 'bg-teal-100 dark:bg-teal-700 text-teal-700 dark:text-teal-100 ' : 'bg-rose-100 dark:bg-rose-700 text-rose-700 dark:text-rose-100' }} {{ $usuario->role->nombre == 'Administrador' ? 'cursor-not-allowed' : 'cursor-pointer' }}">
+                                    {{ $usuario->estado == 1 ? 'Activo' : 'Inactivo' }}
+                                </button>
                             <td class="px-4 py-3 w-2/12">
                                 <div class="flex justify-center items-center space-x-1">
                                     <a title="Ver información del usuario"
