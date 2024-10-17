@@ -60,25 +60,54 @@ class Tabla extends Component
     // Eliminar
     public function eliminar()
     {
-        if (!Hash::check($this->password, Auth::user()->password)) {
-        $this->addError('password', 'La contraseña es incorrecta.');
-        return;
-        }
+         try {
+            // Validar contraseña
+            if (!Hash::check($this->password, Auth::user()->password)) {
+                $this->addError('password', 'La contraseña es incorrecta.');
+                return;
+            }
 
-        // dd($this->usuarioId);
-        // Eliminar usuario
-        $usuario = User::find($this->usuarioId);
-        $usuario->delete();
+            // Buscar usuario
+            $usuario = User::find($this->usuarioId);
 
-        // Cerrar la modal
-        $this->abrirModal = false;
-        $this->dispatch('usuarioEliminado');
+            // Verificar si el usuario tiene clientes
+            if ($usuario->clientes->count() > 0) {
+                toastr()->addWarning('¡El usuario tiene clientes asociados!', [
+                'positionClass' => 'toast-bottom-right',
+                'closeButton' => true,
+                ]);
+                return;
+            }
 
-        // Mostrar mensaje
-        toastr()->addSuccess('¡Usuario eliminado!', [
-            'positionClass' => 'toast-bottom-right',
-            'closeButton' => true,
-        ]);
+            // Verificar si el usuario tiene tramites
+            if ($usuario->tramites->count() > 0) {
+                toastr()->addWarning('¡El usuario tiene trámites asociados!', [
+                'positionClass' => 'toast-bottom-right',
+                'closeButton' => true,
+                ]);
+                return;
+            }
+
+            // Eliminar usuario
+            $usuario->delete();
+
+            // Cerrar la modal
+            $this->abrirModal = false;
+            $this->dispatch('usuarioEliminado');
+
+            // Mostrar mensaje
+            toastr()->addSuccess('¡Usuario eliminado!', [
+                'positionClass' => 'toast-bottom-right',
+                'closeButton' => true,
+            ]);
+       } catch (\Exception $e) {
+            $this->addError('password', 'Error al eliminar el cliente.'.$e->getMessage());
+            toastr()->addError('¡Error al eliminar el cliente!', [
+                'positionClass' => 'toast-bottom-right',
+                'closeButton' => true,
+            ]);
+       }
+        
     }
 
      // Limpiar errores
