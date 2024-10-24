@@ -1,7 +1,7 @@
 <div>
-    <!-- Agregar cliente -->
+    <!-- Agregar tramite -->
     <a class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-teal-100 bg-teal-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-teal cursor-pointer hover:bg-teal-700 transition-colors duration-150 border border-transparent"
-        href="{{ route('clientes.crear') }}" wire:navigate>
+        href="{{ route('tramites.crear') }}" wire:navigate>
         <div class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6">
@@ -9,17 +9,17 @@
                     d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
 
-            <span class="pl-4">Agregar nuevo cliente</span>
+            <span class="pl-4">Agregar nuevo trámite</span>
         </div>
         <span>Vamos &RightArrow;</span>
     </a>
 
-    <!-- Titulo -->
+    <!-- Título -->
     <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-        Tabla de Clientes
+        Tabla de Trámites
     </h4>
 
-    <!-- Tabla de clientes -->
+    <!-- Tabla de tramites -->
     <div class="w-full overflow-hidden rounded-lg shadow-lg border mx-auto dark:border-gray-700">
         <div class="w-full overflow-x-auto">
             <table class="w-full min-w-full table-auto whitespace-nowrap">
@@ -27,46 +27,40 @@
                     <tr
                         class="text-xs font-semibold tracking-widest text-center text-gray-500 uppercase border-b-2  dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                         <th class="px-4 py-3 w-1/12">No.</th>
-                        <th class="px-4 py-3 w-3/12">Nombres</th>
-                        <th class="px-4 py-3 w-1/12">DPI</th>
-                        <th class="px-4 py-3 w-2/12">Correo</th>
-                        <th class="px-4 py-3 w-1/12">NIT</th>
-                        <th class="px-4 py-3 w-1/12">Teléfono</th>
+                        <th class="px-4 py-3 w-3/12">Cliente</th>
+                        <th class="px-4 py-3 w-3/12">Tipo de trámite</th>
+                        <th class="px-4 py-3 w-1/12">Gastos</th>
+                        <th class="px-4 py-3 w-1/12">Fecha</th>
                         <th class="px-4 py-3 w-1/12">Estado</th>
                         <th class="px-4 py-3 w-2/12">Acciones</th>
                     </tr>
                 </thead>
 
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                    @if ($clientes->isEmpty())
+                    @if ($tramites->isEmpty())
                         <tr class="text-gray-700 dark:text-gray-400 text-center">
-                            <td class="px-4 py-3" colspan="8">No hay registros</td>
+                            <td class="px-4 py-3" colspan="7">No hay registros</td>
                         </tr>
                     @endif
-                    @foreach ($clientes as $cliente)
+                    @foreach ($tramites as $tramite)
                         <tr class="text-gray-700 dark:text-gray-400 text-center">
-                            <td class="px-4 py-3 w-1/12">{{ $cliente->id }}</td>
-                            <td class="px-4 py-3 w-3/12">
-                                <p class="font-semibold">{{ $cliente->nombres }} {{ $cliente->apellidos }}</p>
-                                <p class="text-xs text-gray-600 dark:text-gray-400">
-                                    {{ $cliente->direccion }}
-                                </p>
-                            </td>
-                            <td class="px-4 py-3 w-1/12">{{ $cliente->dpi }}</td>
-                            <td class="px-4 py-3 w-2/12">{{ $cliente->email }}</td>
-                            <td class="px-4 py-3 w-1/12">{{ $cliente->nit }}</td>
-                            <td class="px-4 py-3 w-1/12">{{ $cliente->telefono }}</td>
+                            <td class="px-4 py-3 font-semibold w-1/12">{{ $tramite->id }}</td>
+                            <td class="px-4 py-3 w-3/12">{{ $tramite->cliente->nombres }}
+                                {{ $tramite->cliente->apellidos }} </td>
+                            <td class="px-4 py-3 w-3/12">{{ $tramite->tipoTramite->nombre }}</td>
+                            <td class="px-4 py-3 w-1/12">Q. {{ $tramite->gastos }}</td>
+                            <td class="px-4 py-3 font-semibold w-1/12">{{ $tramite->fecha }}</td>
                             <td class="px-4 py-3 w-1/12">
-                                <button wire:click="cambiarEstado({{ $cliente->id }})"
-                                    class="px-4 py-2 font-semibold leading-tight rounded-full {{ $cliente->estado == 1 ? 'bg-teal-100 dark:bg-teal-700 text-teal-700 dark:text-teal-100 ' : 'bg-rose-100 dark:bg-rose-700 text-rose-700 dark:text-rose-100' }}">
-                                    {{ $cliente->estado == 1 ? 'Activo' : 'Inactivo' }}
+                                <button wire:click="cambiarEstado({{ $tramite->id }})"
+                                    class="px-4 py-2 font-semibold leading-tight rounded-full {{ $tramite->estado == 1 ? 'bg-teal-100 dark:bg-teal-700 text-teal-700 dark:text-teal-100 ' : 'bg-rose-100 dark:bg-rose-700 text-rose-700 dark:text-rose-100' }}">
+                                    {{ $tramite->estado == 1 ? 'Activo' : 'Inactivo' }}
                                 </button>
                             </td>
                             <td class="px-4 py-3 w-2/12">
-                                <div class="flex justify-center items-center space-x-1">
-                                    <a title="Ver información del cliente"
-                                        href="{{ route('clientes.mostrar', $cliente->id) }}" wire:navigate
-                                        class="py-1 px-2 text-purple-600 rounded-lg focus:outline-none focus:shadow-outline-gray hover:border hover:border-purple-600 border border-transparent"
+                                <div class="flex items-center justify-center space-x-2 text-sm">
+                                    <a title="Ver información del trámite"
+                                        href="{{ route('tramites.mostrar', $tramite->id) }}" wire:navigate
+                                        class="flex justify-center items-center gap-2 font-semibold py-1 px-2 text-purple-600 rounded-lg focus:outline-none focus:shadow-outline-gray hover:border hover:border-purple-600 border border-transparent"
                                         aria-label="Ver">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -76,7 +70,7 @@
                                                 d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                         </svg>
                                     </a>
-                                    <button title="Editar el cliente" wire:click="editar({{ $cliente->id }})"
+                                    <button title="Editar el trámite" wire:click="editar({{ $tramite->id }})"
                                         class="py-1 px-2 text-orange-600 rounded-lg focus:outline-none focus:shadow-outline-gray hover:border hover:border-orange-600 border border-transparent"
                                         aria-label="Editar">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -85,7 +79,7 @@
                                                 d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
                                         </svg>
                                     </button>
-                                    <button title="Eliminar el cliente" wire:click="modalEliminar({{ $cliente->id }})"
+                                    <button title="Eliminar el trámite" wire:click="modalEliminar({{ $tramite->id }})"
                                         class="py-1 px-2 text-rose-600 rounded-lg focus:outline-none focus:shadow-outline-gray hover:border hover:border-rose-600 border border-transparent"
                                         aria-label="Eliminar">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -110,8 +104,8 @@
             <div class="w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg px-6 py-4 max-w-md m-2">
                 <!-- Header -->
                 <header class="flex justify-between px-6 py-3">
-                    <p class="text-xl font-semibold text-rose-600 dark:text-rose-400">Eliminar Cliente No.
-                        {{ $clienteId }}</p>
+                    <p class="text-xl font-semibold text-rose-600 dark:text-rose-400">Eliminar Trámite No.
+                        {{ $tramiteId }}</p>
                     <button
                         class="inline-flex items-center justify-center w-6 h-6 text-gray-400 transition-colors duration-150 rounded dark:hover:text-gray-200 hover:text-gray-700  hover:border"
                         wire:click="cerrarModal" aria-label="close">
@@ -127,10 +121,12 @@
                 <!-- Contenido -->
                 <div class="px-6 py-4">
                     <p class="text-gray-800 dark:text-white">
-                        ¿Estás seguro de que deseas eliminar al cliente: <span
+                        ¿Estás seguro de que deseas eliminar el trámite del cliente: <span
                             class="font-semibold text-rose-600 dark:text-rose-400">
-                            {{ $nombres }}
-                            {{ $apellidos }}</span>?
+                            {{ $clienteNombre }} </span> con el tipo de trámite: <span
+                            class="font-semibold text-rose-600 dark:text-rose-400">
+                            {{ $tipoTramiteNombre }}
+                        </span>?
                     </p>
 
                     <!-- Formulario -->

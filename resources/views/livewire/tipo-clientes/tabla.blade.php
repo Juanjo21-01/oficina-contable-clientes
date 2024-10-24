@@ -24,7 +24,8 @@
                             <td class="px-4 py-3 font-semibold w-6/12">{{ $tipoCliente->nombre }}</td>
                             <td class="px-4 py-3 w-4/12">
                                 <div class="flex items-center justify-center space-x-2 text-sm">
-                                    <button title="Ver información del usuario"
+                                    <a title="Ver información del tipo de cliente"
+                                        href="{{ route('tipo-clientes.mostrar', $tipoCliente->id) }}" wire:navigate
                                         class="flex justify-center items-center gap-2 font-semibold py-1 px-2 text-purple-600 rounded-lg focus:outline-none focus:shadow-outline-gray hover:border hover:border-purple-600 border border-transparent"
                                         aria-label="Ver">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -35,7 +36,7 @@
                                                 d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                         </svg>
                                         <span class="hidden md:block">Ver</span>
-                                    </button>
+                                    </a>
                                 </div>
                             </td>
                         </tr>

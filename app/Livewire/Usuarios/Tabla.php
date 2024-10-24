@@ -26,6 +26,7 @@ class Tabla extends Component
     public function modalEliminar($usuarioId)
     {
         $this->password = '';
+        $this->clearError('password');
 
        // Buscar usuario
         $usuario = User::find($usuarioId);

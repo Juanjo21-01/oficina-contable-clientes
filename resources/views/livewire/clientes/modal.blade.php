@@ -6,7 +6,7 @@
             <!-- Header -->
             <header class="flex justify-between px-6 py-3">
                 <p class="text-xl font-semibold text-amber-600 dark:text-amber-400">
-                    Editar Cliente No. {{$clienteId}} </p>
+                    Editar Cliente No. {{ $clienteId }} </p>
                 <button
                     class="inline-flex items-center justify-center w-6 h-6 text-gray-400 transition-colors duration-150 rounded dark:hover:text-gray-200 hover:text-gray-700  hover:border"
                     wire:click="cerrarModal" aria-label="close">

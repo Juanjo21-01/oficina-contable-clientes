@@ -43,7 +43,7 @@ new class extends Component {
 
         <!-- Enlaces -->
         <ul>
-            {{-- Usuarios ✅--}}
+            {{-- Usuarios ✅ --}}
             <li class="relative px-6 py-3">
                 @if (request()->routeIs('roles') || request()->routeIs('usuarios.index') || request()->routeIs('usuarios.mostrar'))
                     <span class="absolute inset-y-0 left-0 w-1 bg-teal-600 rounded-tr-lg rounded-br-lg"
@@ -102,12 +102,22 @@ new class extends Component {
             </li>
             {{-- Tramites --}}
             <li class="relative px-6 py-3">
-                @if (request()->routeIs('dashboard'))
+                @if (request()->routeIs('tipo-tramites.index') ||
+                        request()->routeIs('tipo-tramites.mostrar') ||
+                        request()->routeIs('tramites.index') ||
+                        request()->routeIs('tramites.crear') ||
+                        request()->routeIs('tramites.mostrar'))
                     <span class="absolute inset-y-0 left-0 w-1 bg-teal-600 rounded-tr-lg rounded-br-lg"
                         aria-hidden="true"></span>
                 @endif
                 <button
-                    class="inline-flex items-center justify-between w-full text-base transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('dashboard') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
+                    class="inline-flex items-center justify-between w-full text-base transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('tipo-tramites.index') ||
+                    request()->routeIs('tipo-tramites.mostrar') ||
+                    request()->routeIs('tramites.index') ||
+                    request()->routeIs('tramites.crear') ||
+                    request()->routeIs('tramites.mostrar')
+                        ? 'text-teal-600 font-bold'
+                        : 'font-semibold' }}"
                     @click="togglePagesMenuTramites" aria-haspopup="true">
                     <span class="inline-flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -133,8 +143,10 @@ new class extends Component {
                         aria-label="submenu">
                         <li
                             class="px-2 py-1 transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200">
-                            <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200"
-                                href="#">
+                            <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('tipo-tramites.index') || request()->routeIs('tipo-tramites.mostrar')
+                                ? 'text-teal-600 font-bold'
+                                : 'font-semibold' }}"
+                                href="{{ route('tipo-tramites.index') }}" wire:navigate>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -145,25 +157,25 @@ new class extends Component {
                         </li>
                         <li
                             class="px-2 py-1 transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200">
-                            <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200"
-                                href="#">
+                            <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('tramites.index') || request()->routeIs('tramites.crear') || request()->routeIs('tramites.mostrar') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
+                                href="{{ route('tramites.index') }}" wire:navigate>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
                                 </svg>
-
                                 <span class="ml-4">Trámites</span>
                             </a>
                         </li>
                     </ul>
                 </template>
             </li>
-            {{-- Clientes ✅--}}
+            {{-- Clientes ✅ --}}
             <li class="relative px-6 py-3">
                 @if (request()->routeIs('tipo-clientes.index') ||
                         request()->routeIs('tipo-clientes.mostrar') ||
                         request()->routeIs('clientes.index') ||
+                        request()->routeIs('clientes.crear') ||
                         request()->routeIs('clientes.mostrar'))
                     <span class="absolute inset-y-0 left-0 w-1 bg-teal-600 rounded-tr-lg rounded-br-lg"
                         aria-hidden="true"></span>
@@ -172,6 +184,7 @@ new class extends Component {
                     class="inline-flex items-center justify-between w-full text-base transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('tipo-clientes.index') ||
                     request()->routeIs('tipo-clientes.mostrar') ||
                     request()->routeIs('clientes.index') ||
+                    request()->routeIs('clientes.crear') ||
                     request()->routeIs('clientes.mostrar')
                         ? 'text-teal-600 font-bold'
                         : 'font-semibold' }}"
@@ -199,7 +212,9 @@ new class extends Component {
                         aria-label="submenu">
                         <li
                             class="px-2 py-1 transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200">
-                            <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('tipo-clientes.index') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
+                            <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('tipo-clientes.index') || request()->routeIs('tipo-clientes.mostrar')
+                                ? 'text-teal-600 font-bold'
+                                : 'font-semibold' }}"
                                 href="{{ route('tipo-clientes.index') }}" wire:navigate>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -211,7 +226,11 @@ new class extends Component {
                         </li>
                         <li
                             class="px-2 py-1 transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200">
-                            <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('clientes.index') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
+                            <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('clientes.index') ||
+                            request()->routeIs('clientes.crear') ||
+                            request()->routeIs('clientes.mostrar')
+                                ? 'text-teal-600 font-bold'
+                                : 'font-semibold' }}"
                                 href="{{ route('clientes.index') }}" wire:navigate>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">

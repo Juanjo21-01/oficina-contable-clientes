@@ -33,6 +33,16 @@ Route::middleware(AUTH)->group(function () {
     Route::view('clientes', 'clientes.index')->name('clientes.index');
     Route::view('clientes/crear', 'clientes.crear')->name('clientes.crear');
     Route::view('clientes/{id}', 'clientes.mostrar')->name('clientes.mostrar');
+
+    // Tipo de Trámites
+    Route::view('tipo-tramites', 'tipo-tramites.index')->name('tipo-tramites.index');
+    Route::view('tipo-tramites/{id}', 'tipo-tramites.mostrar')->name('tipo-tramites.mostrar');
+
+    // Trámites
+    Route::view('tramites', 'tramites.index')->name('tramites.index');
+    Route::view('tramites/crear', 'tramites.crear')->name('tramites.crear');
+    Route::view('tramites/{id}', 'tramites.mostrar')->name('tramites.mostrar');
+
 });
 
 require __DIR__.'/auth.php';

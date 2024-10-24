@@ -26,6 +26,7 @@ class Tabla extends Component
     public function modalEliminar($clienteId)
     {
         $this->password = '';
+        $this->clearError('password');
 
         // Buscar cliente
         $cliente = Cliente::find($clienteId);
@@ -43,12 +44,6 @@ class Tabla extends Component
     {
         $this->abrirModal = false;
         $this->reset('clienteId');
-    }
-
-    // Crear
-    public function crear()
-    {
-        $this->dispatch('crearCliente');
     }
 
     // Editar
