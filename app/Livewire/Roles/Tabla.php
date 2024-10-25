@@ -22,4 +22,10 @@ class Tabla extends Component
             'roles' => $this->roles
         ]);
     }
+
+    // Ver usuarios de un rol
+    public function verUsuarios($verUsuarios)
+    {
+        $this->dispatch('verUsuarios', $verUsuarios);
+    }
 }

@@ -10,11 +10,13 @@
         <span>Volver a la tabla de usuarios</span>
     </a>
 
-    <h1 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+    <h1 class="my-2 text-2xl font-semibold text-gray-700 dark:text-gray-200">
         Usuario No. {{ request()->route('id') }}
     </h1>
 
-    <!-- Tabla -->
+    <!-- Detalles -->
+    <livewire:usuarios.detalle :id="request()->route('id')" />
 
     <!-- Modal -->
+    <livewire:usuarios.modal />
 </x-app-layout>
