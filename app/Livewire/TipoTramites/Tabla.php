@@ -73,7 +73,7 @@ class Tabla extends Component
 
             // Verificar si el tipo de trámite tiene trámites asociados
             if ($tipoTramite->tramites->count() > 0) {
-                toastr->addWarning('password', '¡El tipo de trámite tiene trámites asociados!', [
+                toastr()->addWarning('¡Existen trámites asociados!', [
                     'positionClass' => 'toast-bottom-right',
                     'closeButton' => true,
                 ]);

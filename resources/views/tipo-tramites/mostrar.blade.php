@@ -7,14 +7,16 @@
             class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
         </svg>
-        <span>Volver a la tabla de tipo de tramites</span>
+        <span>Volver a la tabla de tipo de trámites</span>
     </a>
 
-    <h1 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+    <h1 class="my-2 text-2xl font-semibold text-gray-700 dark:text-gray-200">
         Tipo de Tramite No. {{ request()->route('id') }}
     </h1>
 
-    <!-- Tabla -->
+    <!-- Detalles -->
+    <livewire:tipo-tramites.detalle :id="request()->route('id')" />
 
     <!-- Modal -->
+    <livewire:tipo-tramites.modal />
 </x-app-layout>

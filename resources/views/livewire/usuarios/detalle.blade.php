@@ -1,14 +1,14 @@
 <div>
     <div class="p-6 space-y-8">
         <!-- Tarjeta de perfil del usuario -->
-        <div class="flex items-center p-4 bg-white rounded-lg shadow-md">
-            <div class="space-y-2 w-full">
+        <div class="flex items-center p-4 bg-white dark:bg-gray-800 dark:border-gray-700 rounded-lg shadow-md">
+            <div class="space-y-2 w-full ">
                 <h2 class="text-2xl font-semibold text-teal-600">{{ $usuario->nombres }} {{ $usuario->apellidos }}</h2>
-                <p class="text-gray-700"><strong>Email:</strong> {{ $usuario->email }}</p>
-                <p class="text-gray-700"><strong>Rol:</strong> {{ $usuario->role->nombre }}</p>
-                <p class="text-gray-700">
+                <p class="text-gray-700 dark:text-gray-300"><strong>Email:</strong> {{ $usuario->email }}</p>
+                <p class="text-gray-700 dark:text-gray-300"><strong>Rol:</strong> {{ $usuario->role->nombre }}</p>
+                <p class="text-gray-700 dark:text-gray-300">
                     <strong>Estado:</strong>
-                    <span class="{{ $usuario->estado ? 'text-teal-500' : 'text-rose-500' }}">
+                    <span class="{{ $usuario->estado ? 'text-teal-500 dark:text-teal-400' : 'text-rose-500 dark:text-rose-400' }}">
                         {{ $usuario->estado ? 'Activo' : 'Inactivo' }}
                     </span>
                 </p>
@@ -33,18 +33,18 @@
         </div>
 
         <!-- Espacio para estadísticas -->
-        <div class="bg-white rounded-lg shadow-md p-4">
-            <h3 class="text-2xl font-semibold text-teal-600">Estadísticas</h3>
-            <p class="text-gray-600 mb-4">Gráfica de la cantidad de clientes registrados y trámites realizados</p>
-            <div class="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
-                <span class="text-gray-500">Gráfica aquí</span>
+        <div class="bg-white rounded-lg shadow-md p-4 dark:bg-gray-800">
+            <h3 class="text-2xl font-semibold text-teal-600 dark:text-teal-400">Estadísticas</h3>
+            <p class="text-gray-600 mb-4 dark:text-gray-400">Gráfica de la cantidad de clientes registrados y trámites realizados</p>
+            <div class="w-full h-64 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                <span class="text-gray-500 dark:text-gray-300">Gráfica aquí</span>
             </div>
         </div>
 
         <!-- Tabla de Clientes Relacionados -->
-        <div class="bg-white rounded-lg shadow-md p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
             <div class="flex justify-between">
-                <h3 class="text-xl font-semibold text-teal-600 p-2">Últimos Clientes Registrados</h3>
+                <h3 class="text-xl font-semibold text-teal-600 dark:text-teal-400 p-2">Últimos Clientes Registrados</h3>
                 {{-- boton para visitar la pagina de clientes --}}
                 <div class="flex justify-end">
                     <a href="{{ route('clientes.index') }}" wire:navigate
@@ -57,7 +57,7 @@
                     </a>
                 </div>
             </div>
-            <table class="min-w-full divide-y divide-gray-200">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                 <thead>
                     <tr
                         class="text-xs font-semibold tracking-widest text-center text-gray-500 uppercase border-b-2  dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
@@ -68,7 +68,7 @@
                         <th class="px-4 py-3 w-2/12">NIT</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                     @if ($usuario->clientes->isEmpty())
                         <tr class="text-gray-700 dark:text-gray-400 text-center">
                             <td class="px-4 py-3" colspan="5">No hay registros</td>
@@ -93,9 +93,9 @@
         </div>
 
         <!-- Tabla de Trámites Relacionados -->
-        <div class="bg-white rounded-lg shadow-md p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
             <div class="flex justify-between">
-                <h3 class="text-xl font-semibold text-teal-600 p-2">Últimos Trámites Realizados</h3>
+                <h3 class="text-xl font-semibold text-teal-600 dark:text-teal-400 p-2">Últimos Trámites Realizados</h3>
                 {{-- boton para visitar la pagina de tramites --}}
                 <div class="flex justify-end">
                     <a href="{{ route('tramites.index') }}" wire:navigate
@@ -108,7 +108,7 @@
                     </a>
                 </div>
             </div>
-            <table class="min-w-full divide-y divide-gray-200">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                 <thead>
                     <tr
                         class="text-xs font-semibold tracking-widest text-center text-gray-500 uppercase border-b-2  dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
@@ -119,7 +119,7 @@
                         <th class="px-4 py-3 w-2/12">Fecha</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                     @if ($usuario->tramites->isEmpty())
                         <tr class="text-gray-700 dark:text-gray-400 text-center">
                             <td class="px-4 py-3" colspan="5">No hay registros</td>
