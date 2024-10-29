@@ -7,14 +7,16 @@
             class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
         </svg>
-        <span>Volver a la tabla clientes</span>
+        <span>Volver a la tabla de clientes</span>
     </a>
 
-    <h1 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-        Clientes No. {{ request()->route('id') }}
+    <h1 class="my-2 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+        Cliente No. {{ request()->route('id') }}
     </h1>
 
-    <!-- Tabla -->
+    <!-- Detalles -->
+    <livewire:clientes.detalle :id="request()->route('id')" />
 
     <!-- Modal -->
+    <livewire:clientes.modal />
 </x-app-layout>

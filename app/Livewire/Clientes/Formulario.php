@@ -27,8 +27,6 @@ class Formulario extends Component
         }
     }
 
-    
-
     // Guardar
     public function guardar()
     {

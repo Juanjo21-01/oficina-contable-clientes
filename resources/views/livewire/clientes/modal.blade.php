@@ -147,8 +147,8 @@
                             Cancelar
                         </button>
                         <button type="submit"
-                            class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 border border-transparent rounded-lg sm:w-auto sm:px-8 sm:py-3 focus:outline-none bg-teal-600 active:bg-teal-600 hover:bg-teal-700">
-                            Guardar
+                            class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 border border-transparent rounded-lg sm:w-auto sm:px-8 sm:py-3 focus:outline-none bg-amber-600 active:bg-amber-600 hover:bg-amber-700">
+                            Actualizar
                         </button>
                     </div>
                 </form>

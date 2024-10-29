@@ -10,11 +10,10 @@
         <span>Volver a la tabla de tipo de clientes</span>
     </a>
 
-    <h1 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-        Tipo de Clientes No. {{ request()->route('id') }}
+    <h1 class="my-2 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+        Tipo de Cliente No. {{ request()->route('id') }}
     </h1>
 
-    <!-- Tabla -->
-
-    <!-- Modal -->
+    <!-- Detalles -->
+    <livewire:tipo-clientes.detalle :id="request()->route('id')" />
 </x-app-layout>
