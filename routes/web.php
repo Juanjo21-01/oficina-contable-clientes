@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Roles;
+use App\Http\Controllers\PDFController;
 
 const AUTH = 'auth';
 
@@ -43,6 +43,8 @@ Route::middleware(AUTH)->group(function () {
     Route::view('tramites/crear', 'tramites.crear')->name('tramites.crear');
     Route::view('tramites/{id}', 'tramites.mostrar')->name('tramites.mostrar');
 
+    // PDFs
+    Route::get('/tramites/pdf/{id}', [PDFController::class, 'reciboPDF'])->name('tramites.pdf');
 });
 
 require __DIR__.'/auth.php';

@@ -111,26 +111,37 @@
                     <tr
                         class="text-xs font-semibold tracking-widest text-center text-gray-500 uppercase border-b-2 bg-gray-50 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700">
                         <th class="px-4 py-3 w-1/12">No.</th>
-                        <th class="px-4 py-3 w-4/12">Cliente</th>
+                        <th class="px-4 py-3 w-3/12">Cliente</th>
                         <th class="px-4 py-3 w-2/12">Gastos</th>
                         <th class="px-4 py-3 w-3/12">Tipo de trámite</th>
                         <th class="px-4 py-3 w-2/12">Fecha</th>
+                        <th class="px-4 py-3 w-1/12">PDF</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                     @if ($cliente->tramites->isEmpty())
                         <tr class="text-gray-700 dark:text-gray-400 text-center">
-                            <td class="px-4 py-3" colspan="5">No hay registros</td>
+                            <td class="px-4 py-3" colspan="6">No hay registros</td>
                         </tr>
                     @endif
                     @foreach ($cliente->tramites->take(5) as $tramite)
                         <tr class="text-gray-700 dark:text-gray-300 text-center">
                             <td class="px-4 py-3 font-semibold w-1/12">{{ $tramite->id }}</td>
-                            <td class="px-4 py-3 w-4/12">{{ $tramite->cliente->nombres }}
+                            <td class="px-4 py-3 w-3/12">{{ $tramite->cliente->nombres }}
                                 {{ $tramite->cliente->apellidos }} </td>
                             <td class="px-4 py-3 w-2/12">Q. {{ $tramite->gastos }}</td>
                             <td class="px-4 py-3 w-3/12">{{ $tramite->tipoTramite->nombre }}</td>
                             <td class="px-4 py-3 font-semibold w-2/12">{{ $tramite->fecha }}</td>
+                            <td class="px-4 py-3 w-1/12">
+                                <a title="Descargar el trámite" href="{{ route('tramites.pdf', $tramite->id) }}"
+                                    class="px-4 py-2 text-orange-600 dark:text-orange-400 rounded-lg focus:outline-none hover:border hover:border-orange-600 border border-transparent flex items-center gap-1 ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="m9 13.5 3 3m0 0 3-3m-3 3v-6m1.06-4.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+                                    </svg>
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
