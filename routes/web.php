@@ -45,6 +45,11 @@ Route::middleware(AUTH)->group(function () {
 
     // PDFs
     Route::get('/tramites/pdf/{id}', [PDFController::class, 'reciboPDF'])->name('tramites.pdf');
+    Route::get('/reportes/pdf/{tipo}', [PDFController::class, 'reportePDF'])->name('reportes.pdf');
+
+    // Reportes
+    Route::view('reportes', 'reportes.index')->name('reportes.index');
+
 });
 
 require __DIR__.'/auth.php';

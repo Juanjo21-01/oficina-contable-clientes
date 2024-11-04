@@ -49,7 +49,8 @@
                                 {{ $tramite->cliente->apellidos }} </td>
                             <td class="px-4 py-3 w-3/12">{{ $tramite->tipoTramite->nombre }}</td>
                             <td class="px-4 py-3 w-1/12">Q. {{ $tramite->gastos }}</td>
-                            <td class="px-4 py-3 font-semibold w-1/12">{{ $tramite->fecha }}</td>
+                            <td class="px-4 py-3 font-semibold w-1/12">{{ date('d/m/Y', strtotime($tramite->fecha)) }}
+                            </td>
                             <td class="px-4 py-3 w-1/12">
                                 <button wire:click="cambiarEstado({{ $tramite->id }})"
                                     class="px-4 py-2 font-semibold leading-tight rounded-full {{ $tramite->estado == 1 ? 'bg-teal-100 dark:bg-teal-700 text-teal-700 dark:text-teal-100 ' : 'bg-rose-100 dark:bg-rose-700 text-rose-700 dark:text-rose-100' }}">
