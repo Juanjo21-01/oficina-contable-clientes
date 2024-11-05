@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Tramites;
 
+use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 use Livewire\Component;
 use App\Models\Tramite;
 use App\Models\TipoTramite;
@@ -10,18 +12,17 @@ use Illuminate\Support\Facades\Auth;
 
 class Tabla extends Component
 {
+    use WithPagination, WithoutUrlPagination;
+
     // Variables
-    public $tramites, $tramiteId, $password, $clienteNombre, $tipoTramiteNombre, $fecha;
+    public $tramiteId, $password, $clienteNombre, $tipoTramiteNombre, $fecha;
     public $abrirModal = false;
+    public $search = '';
+    public $estado = '';
+    public $perPage = 5;
     
     // Eventos
     protected $listeners = ['tramiteGuardado' => 'render', 'tramiteEliminado' => 'render'];
-
-    // Constructor
-    public function mount()
-    {
-        $this->tramites = Tramite::all();
-    }
 
     // Abrir modal
     public function modalEliminar($tramiteId)
@@ -112,12 +113,44 @@ class Tabla extends Component
         ]);
     }
     
+    // Resetear paginación al buscar
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingEstado()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
-        $this->tramites = Tramite::all();
+        $query = Tramite::query();
+
+        // Filtrar por cliente o tipo de trámite
+        if ($this->search) {
+            $query->whereHas('cliente', function ($q) {
+                $q->where('nombres', 'like', '%' . $this->search . '%')
+                ->orWhere('apellidos', 'like', '%' . $this->search . '%');
+            })->orWhereHas('tipoTramite', function ($q) {
+                $q->where('nombre', 'like', '%' . $this->search . '%');
+            });
+        }
+
+        // Filtrar por estado
+        if ($this->estado !== '') {
+            $query->where('estado', $this->estado);
+        }
+
+        // Ordenar de manera descendente
+        $query->orderBy('created_at', 'desc');
+
+        // Obtener los trámites paginados
+        $tramites = $query->paginate($this->perPage);
 
         return view('livewire.tramites.tabla', [
-            'tramites' => $this->tramites
+            'tramites' => $tramites
         ]);
     }
 }

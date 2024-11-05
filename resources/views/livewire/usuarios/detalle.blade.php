@@ -125,7 +125,7 @@
                             <td class="px-4 py-3" colspan="5">No hay registros</td>
                         </tr>
                     @endif
-                    @foreach ($usuario->tramites->sortByDesc('fecha')->take(5) as $tramite)
+                    @foreach ($usuario->tramites->sortByDesc('created_at')->take(5) as $tramite)
                         <tr class="text-gray-700 dark:text-gray-400 text-center">
                             <td class="px-4 py-3 font-semibold w-1/12">{{ $loop->iteration }}</td>
                             <td class="px-4 py-3 w-4/12">{{ $tramite->cliente->nombres }}

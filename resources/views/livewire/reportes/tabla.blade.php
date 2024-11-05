@@ -110,7 +110,7 @@
 
     <div class="w-full mx-auto flex items-center justify-between mb-4">
         <!-- Título -->
-        <h4 class="p-2 text-lg font-semibold text-gray-600 dark:text-gray-300">
+        <h4 class="p-2 text-xl font-semibold text-gray-600 dark:text-gray-300">
             Tabla de Trámites por {{ ucfirst($filtrar) }}
         </h4>
         <!-- Reporte de los trámites -->

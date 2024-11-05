@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Livewire\Clientes;
-
+use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 use Livewire\Component;
 use App\Models\Cliente;
 use Illuminate\Support\Facades\Hash;
@@ -9,18 +10,16 @@ use Illuminate\Support\Facades\Auth;
 
 class Tabla extends Component
 {
+    use WithPagination, WithoutUrlPagination;
+
     // Variables
-    public $clientes, $clienteId, $password, $nombres, $apellidos;
+    public $clienteId, $password, $nombres, $apellidos;
     public $abrirModal = false;
+    public $search = '', $estado = '';
+    public $perPage = 5;
 
     // Eventos
     protected $listeners = ['clienteGuardado' => 'render', 'clienteEliminado' => 'render'];
-
-    // Constructor
-    public function mount()
-    {
-        $this->clientes = Cliente::all();
-    }
 
     // Abrir modal
     public function modalEliminar($clienteId)
@@ -127,11 +126,40 @@ class Tabla extends Component
         ]);
     }
 
+    // Resetear paginación al buscar
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingEstado()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
-        $this->clientes = Cliente::all();
+        $query = Cliente::query();
+        // Filtrar por nombre o apellido, correo, nit o dpi
+        if ($this->search) {
+            $query->where(function ($q) {
+                $q->where('nombres', 'like', '%' . $this->search . '%')
+                ->orWhere('apellidos', 'like', '%' . $this->search . '%');
+            });
+        }
+
+        // Filtrar por estado
+        if ($this->estado !== '') {
+            $query->where('estado', $this->estado);
+        }
+
+        // Ordenar de manera descendente
+        $query->orderBy('created_at', 'desc');
+
+        // Obtener los clientes paginados
+        $clientes = $query->paginate($this->perPage);
 
         return view('livewire.clientes.tabla', [
-            'clientes' => $this->clientes]);
+            'clientes' => $clientes]);
     }
 }

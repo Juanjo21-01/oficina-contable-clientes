@@ -1,26 +1,61 @@
 <div>
-    <!-- Agregar tramite -->
-    <a class="flex items-center justify-between p-4 mb-8 font-semibold text-teal-100 bg-teal-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-teal cursor-pointer hover:bg-teal-700 transition-colors duration-150 border border-transparent"
-        href="{{ route('tramites.crear') }}" wire:navigate>
-        <div class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-            </svg>
-
-            <span class="pl-4">Agregar nuevo trámite</span>
-        </div>
-        <span>Vamos &RightArrow;</span>
-    </a>
-
     <!-- Título -->
-    <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+    <h4 class="mb-4 text-xl font-semibold text-gray-600 dark:text-gray-300">
         Tabla de Trámites
     </h4>
 
+    <div class="flex flex-col sm:flex-row items-center justify-between mb-4 space-y-2 sm:space-y-0 sm:space-x-4">
+        <!-- Agregar trámite -->
+        <a class="w-8/12 flex items-center justify-between p-4 font-semibold text-teal-100 bg-teal-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-teal cursor-pointer hover:bg-teal-700 transition-colors duration-150 border border-transparent"
+            href="{{ route('tramites.crear') }}" wire:navigate>
+            <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+
+                <span class="pl-4">Agregar nuevo trámite</span>
+            </div>
+            <span>Vamos &RightArrow;</span>
+        </a>
+
+        <!-- Buscador y filtro -->
+        <div class="w-4/12 flex flex-col sm:flex-row items-center justify-end mb-4 space-y-2 sm:space-y-0 sm:space-x-4">
+            <!-- Input de búsqueda -->
+            <div class="w-full sm:w-auto">
+                <x-input-label for="search" :value="__('Buscar')" />
+                <x-text-input wire:model.live.debounce.500ms="search" id="search" placeholder="......"
+                    class="block w-full mt-1 px-3 py-1 " type="text" />
+            </div>
+
+            <!-- Filtro de estado -->
+            <div class="w-full sm:w-auto">
+                <x-input-label for="estado" :value="__('Estado')" />
+                <select wire:model.live="estado" id="estado"
+                    class="block w-full mt-1 pl-3 pr-7 py-1 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-teal-400 dark:focus:border-teal-600 focus:outline-none focus:shadow-outline-teal rounded-md shadow-sm form-select">
+                    <option value="">Todos</option>
+                    <option value="1">Activos</option>
+                    <option value="0">Inactivos</option>
+                </select>
+            </div>
+
+            <!-- Cambiar la cantidad de registros por página -->
+            <div class="w-full sm:w-auto">
+                <x-input-label for="perPage" :value="__('Mostrar')" />
+                <select wire:model.live="perPage" id="perPage"
+                    class="block w-full mt-1 pl-3 pr-7 py-1 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-teal-400 dark:focus:border-teal-600 focus:outline-none focus:shadow-outline-teal rounded-md shadow-sm form-select">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="25">25</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
     <!-- Tabla de tramites -->
-    <div class="w-full overflow-hidden rounded-lg shadow-lg border mx-auto dark:border-gray-700 mb-5">
+    <div class="w-full overflow-hidden rounded-lg shadow-lg border mx-auto dark:border-gray-700 mb-4">
         <div class="w-full overflow-x-auto">
             <table class="w-full min-w-full table-auto whitespace-nowrap">
                 <thead>
@@ -96,6 +131,9 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- Paginación -->
+        {{ $tramites->links('livewire::custom-pagination') }}
     </div>
 
     <!-- Modal de eliminar -->
@@ -110,8 +148,8 @@
                     <button
                         class="inline-flex items-center justify-center w-6 h-6 text-gray-400 transition-colors duration-150 rounded dark:hover:text-gray-200 hover:text-gray-700  hover:border"
                         wire:click="cerrarModal" aria-label="close">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="size-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                         </svg>
                     </button>

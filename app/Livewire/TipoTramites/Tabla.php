@@ -2,6 +2,8 @@
 
 namespace App\Livewire\TipoTramites;
 
+use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 use Livewire\Component;
 use App\Models\TipoTramite;
 use Illuminate\Support\Facades\Hash;
@@ -10,18 +12,17 @@ use Illuminate\Support\Facades\Auth;
 
 class Tabla extends Component
 {
+    use WithPagination, WithoutUrlPagination;
+
     // Variables
-    public $tipoTramites, $tipoTramiteId, $password, $nombre;
+    public $tipoTramiteId, $password, $nombre;
     public $abrirModal = false;
+    public $search = '';
+    public $perPage = 5;
+
 
     // Eventos
     protected $listeners = ['tipoTramiteGuardado' => 'render', 'tipoTramiteEliminado' => 'render'];
-
-    // Constructor
-    public function mount()
-    {
-        $this->tipoTramites = TipoTramite::all();
-    }
 
     // Abrir modal
     public function modalEliminar($tipoTramiteId)
@@ -106,13 +107,27 @@ class Tabla extends Component
     {
         $this->resetErrorBag($error);
     }
+    
+    // Resetear paginación al buscar
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
 
     public function render()
     {
-        $this->tipoTramites = TipoTramite::all();
-        
+        $query = TipoTramite::query();
+
+        // Filtrar por nombre
+        if ($this->search) {
+            $query->where('nombre', 'like', '%' . $this->search . '%');
+        }
+
+        // Obtener los tipos de trámites paginados
+        $tipoTramites = $query->paginate($this->perPage);
+
         return view('livewire.tipo-tramites.tabla', [
-            'tipoTramites' => $this->tipoTramites
+            'tipoTramites' => $tipoTramites
         ]);
     }
 }
