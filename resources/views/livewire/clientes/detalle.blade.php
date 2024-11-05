@@ -112,7 +112,7 @@
                         class="text-xs font-semibold tracking-widest text-center text-gray-500 uppercase border-b-2 bg-gray-50 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700">
                         <th class="px-4 py-3 w-1/12">No.</th>
                         <th class="px-4 py-3 w-3/12">Cliente</th>
-                        <th class="px-4 py-3 w-2/12">Gastos</th>
+                        <th class="px-4 py-3 w-2/12">Precio</th>
                         <th class="px-4 py-3 w-3/12">Tipo de trámite</th>
                         <th class="px-4 py-3 w-2/12">Fecha</th>
                         <th class="px-4 py-3 w-1/12">PDF</th>
@@ -124,14 +124,14 @@
                             <td class="px-4 py-3" colspan="6">No hay registros</td>
                         </tr>
                     @endif
-                    @foreach ($cliente->tramites->take(5) as $tramite)
+                    @foreach ($cliente->tramites->sortByDesc('fecha')->take(5) as $tramite)
                         <tr class="text-gray-700 dark:text-gray-300 text-center">
-                            <td class="px-4 py-3 font-semibold w-1/12">{{ $tramite->id }}</td>
+                            <td class="px-4 py-3 font-semibold w-1/12">{{ $loop->iteration }}</td>
                             <td class="px-4 py-3 w-3/12">{{ $tramite->cliente->nombres }}
                                 {{ $tramite->cliente->apellidos }} </td>
-                            <td class="px-4 py-3 w-2/12">Q. {{ $tramite->gastos }}</td>
+                            <td class="px-4 py-3 w-2/12">Q. {{ $tramite->precio }}</td>
                             <td class="px-4 py-3 w-3/12">{{ $tramite->tipoTramite->nombre }}</td>
-                            <td class="px-4 py-3 font-semibold w-2/12">{{ $tramite->fecha }}</td>
+                            <td class="px-4 py-3 font-semibold w-2/12">{{ date('d/m/Y', strtotime($tramite->fecha)) }}</td>
                             <td class="px-4 py-3 w-1/12">
                                 <a title="Descargar el trámite" href="{{ route('tramites.pdf', $tramite->id) }}"
                                     class="px-4 py-2 text-orange-600 dark:text-orange-400 rounded-lg focus:outline-none hover:border hover:border-orange-600 border border-transparent flex items-center gap-1 ">

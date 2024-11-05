@@ -1,6 +1,6 @@
 <div>
     <!-- Agregar usuario -->
-    <a class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-teal-100 bg-teal-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-teal cursor-pointer hover:bg-teal-700 transition-colors duration-150 border border-transparent"
+    <a class="flex items-center justify-between p-4 mb-8 font-semibold text-teal-100 bg-teal-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-teal cursor-pointer hover:bg-teal-700 transition-colors duration-150 border border-transparent"
         wire:click="crear">
         <div class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -38,7 +38,7 @@
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                     @foreach ($usuarios as $usuario)
                         <tr class="text-gray-700 dark:text-gray-400 text-center">
-                            <td class="px-4 py-3 font-semibold w-1/12">{{ $usuario->id }}</td>
+                            <td class="px-4 py-3 font-semibold w-1/12">{{ $loop->iteration }}</td>
                             <td class="px-4 py-3 font-semibold w-3/12">{{ $usuario->nombres }} {{ $usuario->apellidos }}
                             </td>
                             <td class="px-4 py-3 font-semibold w-3/12">{{ $usuario->email }}</td>

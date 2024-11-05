@@ -66,10 +66,6 @@
                         <td style="padding: 4px 0;">{{ $tramite->tipoTramite->nombre }}</td>
                         <td style="text-align: right; padding: 4px 0;">Q. {{ number_format($tramite->precio, 2) }}</td>
                     </tr>
-                    <tr style="color: #1f2937;">
-                        <td style="padding: 4px 0;">Gastos</td>
-                        <td style="text-align: right; padding: 4px 0;">Q. {{ number_format($tramite->gastos, 2) }}</td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -78,7 +74,7 @@
         <div style="border-top: 1px solid #e5e7eb; margin-bottom: 6px;">
             <div style="text-align: right; font-weight: 600; color: #1f2937; font-size: 18px; padding-top: 4px;">
                 <span>Total</span>
-                <span>Q. {{ number_format($tramite->precio + $tramite->gastos, 2) }}</span>
+                <span>Q. {{ number_format($tramite->precio, 2) }}</span>
             </div>
         </div>
 

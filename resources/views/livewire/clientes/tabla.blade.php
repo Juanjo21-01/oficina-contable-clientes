@@ -1,6 +1,6 @@
 <div>
     <!-- Agregar cliente -->
-    <a class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-teal-100 bg-teal-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-teal cursor-pointer hover:bg-teal-700 transition-colors duration-150 border border-transparent"
+    <a class="flex items-center justify-between p-4 mb-8 font-semibold text-teal-100 bg-teal-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-teal cursor-pointer hover:bg-teal-700 transition-colors duration-150 border border-transparent"
         href="{{ route('clientes.crear') }}" wire:navigate>
         <div class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -45,7 +45,7 @@
                     @endif
                     @foreach ($clientes as $cliente)
                         <tr class="text-gray-700 dark:text-gray-400 text-center">
-                            <td class="px-4 py-3 w-1/12">{{ $cliente->id }}</td>
+                            <td class="px-4 py-3 w-1/12 font-semibold">{{ $loop->iteration }}</td>
                             <td class="px-4 py-3 w-3/12">
                                 <p class="font-semibold">{{ $cliente->nombres }} {{ $cliente->apellidos }}</p>
                                 <p class="text-xs text-gray-600 dark:text-gray-400">

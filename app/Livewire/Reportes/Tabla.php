@@ -109,7 +109,7 @@ class Tabla extends Component
         // Calcular el total de trámites
         $this->totalTramites = $tramites->count();
         // Calcular el gasto total
-        $this->gastoTotal = $tramites->sum('gastos') + $tramites->sum('precio');
+        $this->gastoTotal = $tramites->sum('precio') - $tramites->sum('gastos');
         // Calcular el promedio de gastos
         $this->promedioGasto = $this->totalTramites > 0 ? $this->gastoTotal / $this->totalTramites : 0;
 

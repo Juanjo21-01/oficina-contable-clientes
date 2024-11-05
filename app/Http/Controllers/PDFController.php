@@ -128,8 +128,8 @@ class PDFController extends Controller
         return [
             'tramites' => $tramites,
             'totalTramites' => $tramites->count(),
-            'gastoTotal' => $tramites->sum('gastos') + $tramites->sum('precio'),
-            'promedioGasto' => $tramites->count() > 0 ? ($tramites->sum('gastos') + $tramites->sum('precio')) / $tramites->count() : 0,
+            'gastoTotal' => $tramites->sum('precio') - $tramites->sum('gastos'),
+            'promedioGasto' => $tramites->count() > 0 ? ($tramites->sum('precio') - $tramites->sum('gastos')) / $tramites->count() : 0,
         ];
     }
 }

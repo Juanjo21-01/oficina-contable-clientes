@@ -1,6 +1,6 @@
 <div>
     <!-- Agregar tramite -->
-    <a class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-teal-100 bg-teal-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-teal cursor-pointer hover:bg-teal-700 transition-colors duration-150 border border-transparent"
+    <a class="flex items-center justify-between p-4 mb-8 font-semibold text-teal-100 bg-teal-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-teal cursor-pointer hover:bg-teal-700 transition-colors duration-150 border border-transparent"
         href="{{ route('tramites.crear') }}" wire:navigate>
         <div class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -20,7 +20,7 @@
     </h4>
 
     <!-- Tabla de tramites -->
-    <div class="w-full overflow-hidden rounded-lg shadow-lg border mx-auto dark:border-gray-700">
+    <div class="w-full overflow-hidden rounded-lg shadow-lg border mx-auto dark:border-gray-700 mb-5">
         <div class="w-full overflow-x-auto">
             <table class="w-full min-w-full table-auto whitespace-nowrap">
                 <thead>
@@ -29,7 +29,7 @@
                         <th class="px-4 py-3 w-1/12">No.</th>
                         <th class="px-4 py-3 w-3/12">Cliente</th>
                         <th class="px-4 py-3 w-3/12">Tipo de trámite</th>
-                        <th class="px-4 py-3 w-1/12">Gastos</th>
+                        <th class="px-4 py-3 w-1/12">Precio</th>
                         <th class="px-4 py-3 w-1/12">Fecha</th>
                         <th class="px-4 py-3 w-1/12">Estado</th>
                         <th class="px-4 py-3 w-2/12">Acciones</th>
@@ -44,11 +44,11 @@
                     @endif
                     @foreach ($tramites as $tramite)
                         <tr class="text-gray-700 dark:text-gray-400 text-center">
-                            <td class="px-4 py-3 font-semibold w-1/12">{{ $tramite->id }}</td>
+                            <td class="px-4 py-3 font-semibold w-1/12">{{ $loop->iteration }}</td>
                             <td class="px-4 py-3 w-3/12">{{ $tramite->cliente->nombres }}
                                 {{ $tramite->cliente->apellidos }} </td>
                             <td class="px-4 py-3 w-3/12">{{ $tramite->tipoTramite->nombre }}</td>
-                            <td class="px-4 py-3 w-1/12">Q. {{ $tramite->gastos }}</td>
+                            <td class="px-4 py-3 w-1/12">Q. {{ $tramite->precio }}</td>
                             <td class="px-4 py-3 font-semibold w-1/12">{{ date('d/m/Y', strtotime($tramite->fecha)) }}
                             </td>
                             <td class="px-4 py-3 w-1/12">

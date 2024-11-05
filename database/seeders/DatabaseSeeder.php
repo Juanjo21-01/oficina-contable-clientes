@@ -16,5 +16,8 @@ class DatabaseSeeder extends Seeder
 
         // Usuarios
         $this->call(UserAdminSeeder::class);
+
+        // Tipos de clientes
+        $this->call(TipoClienteSeeder::class);
     }
 }

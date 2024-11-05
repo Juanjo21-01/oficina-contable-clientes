@@ -28,7 +28,7 @@
             </div>
             <div>
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                    Gastos Totales
+                    Remanente Total
                 </p>
                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
                     Q. {{ number_format($gastoTotal, 2) }}
@@ -45,7 +45,7 @@
             </div>
             <div>
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                    Promedio de Gastos
+                    Promedio de Remanente
                 </p>
                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
                     Q. {{ number_format($promedioGasto, 2) }}
@@ -63,12 +63,12 @@
                     <div>
                         <x-input-label for="fechaInicio" :value="__('Fecha Inicial')" />
                         <x-text-input wire:model="fechaInicio" id="fechaInicio" class="block w-full mt-1 px-3 py-1"
-                            type="date" name="fechaInicio" required/>
+                            type="date" name="fechaInicio" required />
                     </div>
                     <div>
                         <x-input-label for="fechaFin" :value="__('Fecha Final')" />
                         <x-text-input wire:model="fechaFin" id="fechaFin" class="block w-full mt-1 px-3 py-1"
-                            type="date" name="fechaFin" required/>
+                            type="date" name="fechaFin" required />
                     </div>
 
                 </div>
@@ -114,7 +114,7 @@
             Tabla de Trámites por {{ ucfirst($filtrar) }}
         </h4>
         <!-- Reporte de los trámites -->
-         @if ($filtrar === 'rango')
+        @if ($filtrar === 'rango')
             <form action="{{ route('reportes.pdf', $filtrar) }}" method="GET" class="flex items-center gap-2">
                 <input type="hidden" name="fechaInicio" value="{{ $fechaInicio }}">
                 <input type="hidden" name="fechaFin" value="{{ $fechaFin }}">
@@ -144,7 +144,7 @@
     </div>
 
     <!-- Tabla de tramites -->
-    <div class="w-full overflow-x-auto rounded-lg shadow-lg border mx-auto dark:border-gray-700 mb-2">
+    <div class="w-full overflow-x-auto rounded-lg shadow-lg border mx-auto dark:border-gray-700 mb-5">
         <table class="min-w-full whitespace-nowrap">
             <thead>
                 <tr
@@ -165,11 +165,12 @@
                         <td class="px-4 py-3 w-3/12">{{ $tramite->cliente->nombres }}
                             {{ $tramite->cliente->apellidos }}</td>
                         <td class="px-4 py-3 w-3/12">{{ $tramite->tipoTramite->nombre }}</td>
-                        <td class="px-4 py-3 font-semibold w-2/12">{{ date('d/m/Y', strtotime($tramite->fecha)) }}</td>
+                        <td class="px-4 py-3 font-semibold w-2/12">{{ date('d/m/Y', strtotime($tramite->fecha)) }}
+                        </td>
                         <td class="px-4 py-3 w-1/12">Q{{ number_format($tramite->precio, 2) }}</td>
                         <td class="px-4 py-3 w-1/12">Q{{ number_format($tramite->gastos, 2) }}</td>
                         <td class="px-4 py-3 font-semibold w-1/12">
-                            Q{{ number_format($tramite->precio + $tramite->gastos, 2) }}
+                            Q{{ number_format($tramite->precio - $tramite->gastos, 2) }}
                         </td>
                     </tr>
                 @empty

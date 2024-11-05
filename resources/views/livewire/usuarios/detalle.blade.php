@@ -74,9 +74,9 @@
                             <td class="px-4 py-3" colspan="5">No hay registros</td>
                         </tr>
                     @endif
-                    @foreach ($usuario->clientes->take(5) as $cliente)
+                    @foreach ($usuario->clientes->sortByDesc('created_at')->take(5) as $cliente)
                         <tr class="text-gray-700 dark:text-gray-400 text-center">
-                            <td class="px-4 py-3 w-1/12">{{ $cliente->id }}</td>
+                            <td class="px-4 py-3 w-1/12 font-semibold">{{ $loop->iteration }}</td>
                             <td class="px-4 py-3 w-4/12">
                                 <p class="font-semibold">{{ $cliente->nombres }} {{ $cliente->apellidos }}</p>
                                 <p class="text-xs text-gray-600 dark:text-gray-400">
@@ -114,8 +114,8 @@
                         class="text-xs font-semibold tracking-widest text-center text-gray-500 uppercase border-b-2  dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                         <th class="px-4 py-3 w-1/12">No.</th>
                         <th class="px-4 py-3 w-4/12">Cliente</th>
-                        <th class="px-4 py-3 w-2/12">Gastos</th>
                         <th class="px-4 py-3 w-3/12">Tipo de trámite</th>
+                        <th class="px-4 py-3 w-2/12">Precio</th>
                         <th class="px-4 py-3 w-2/12">Fecha</th>
                     </tr>
                 </thead>
@@ -125,14 +125,14 @@
                             <td class="px-4 py-3" colspan="5">No hay registros</td>
                         </tr>
                     @endif
-                    @foreach ($usuario->tramites->take(5) as $tramite)
+                    @foreach ($usuario->tramites->sortByDesc('fecha')->take(5) as $tramite)
                         <tr class="text-gray-700 dark:text-gray-400 text-center">
-                            <td class="px-4 py-3 font-semibold w-1/12">{{ $tramite->id }}</td>
+                            <td class="px-4 py-3 font-semibold w-1/12">{{ $loop->iteration }}</td>
                             <td class="px-4 py-3 w-4/12">{{ $tramite->cliente->nombres }}
                                 {{ $tramite->cliente->apellidos }} </td>
-                            <td class="px-4 py-3 w-2/12">Q. {{ $tramite->gastos }}</td>
-                            <td class="px-4 py-3 w-3/12">{{ $tramite->tipoTramite->nombre }}</td>
-                            <td class="px-4 py-3 font-semibold w-2/12">{{ $tramite->fecha }}</td>
+                                <td class="px-4 py-3 w-3/12">{{ $tramite->tipoTramite->nombre }}</td>
+                                <td class="px-4 py-3 w-2/12">Q. {{ $tramite->precio }}</td>
+                            <td class="px-4 py-3 font-semibold w-2/12">{{ date('d/m/Y', strtotime($tramite->fecha)) }}
                         </tr>
                     @endforeach
                 </tbody>

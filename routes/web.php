@@ -2,13 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\DashboardController;
 
 const AUTH = 'auth';
 
 // RUTA PRINCIPAL
-Route::view('/otra', 'welcome');
-
-Route::view('dashboard', 'dashboard')
+Route::get('dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 

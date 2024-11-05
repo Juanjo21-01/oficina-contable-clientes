@@ -117,16 +117,16 @@
             </div>
 
             <!-- Gastos -->
-            <div class="flex justify-between items-center mb-4 text-gray-700 dark:text-gray-400 text-base">
+            <div class="flex justify-between items-center mb-4 text-rose-700 dark:text-rose-400 text-base">
                 <span>Gastos</span>
-                <span>Q. {{ number_format($tramite->gastos, 2) }}</span>
+                <span> - Q. {{ number_format($tramite->gastos, 2) }}</span>
             </div>
 
             <!-- Total -->
             <div class="border-t pt-4 border-gray-200 dark:border-gray-700">
                 <div class="flex justify-between font-semibold text-gray-800 dark:text-gray-200 text-lg">
-                    <span>Total</span>
-                    <span>Q. {{ number_format($tramite->precio + $tramite->gastos, 2) }}</span>
+                    <span>Total Remanente</span>
+                    <span>Q. {{ number_format($tramite->precio - $tramite->gastos, 2) }}</span>
                 </div>
             </div>
 

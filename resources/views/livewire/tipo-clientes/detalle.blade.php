@@ -55,9 +55,9 @@
                             <td class="px-4 py-3" colspan="5">No hay registros</td>
                         </tr>
                     @endif
-                    @foreach ($tipoCliente->clientes->take(5) as $cliente)
+                    @foreach ($tipoCliente->clientes->sortByDesc('created_at')->take(5) as $cliente)
                         <tr class="text-gray-700 dark:text-gray-300 text-center">
-                            <td class="px-4 py-3 w-1/12">{{ $cliente->id }}</td>
+                            <td class="px-4 py-3 w-1/12 font-semibold">{{ $loop->iteration }}</td>
                             <td class="px-4 py-3 w-4/12">
                                 <p class="font-semibold">{{ $cliente->nombres }} {{ $cliente->apellidos }}</p>
                                 <p class="text-xs text-gray-600 dark:text-gray-400">

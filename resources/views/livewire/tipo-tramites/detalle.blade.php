@@ -8,7 +8,8 @@
                     {{ $tipoTramite->created_at->format('d/m/Y') }}
                 </p>
                 <p class="text-gray-700 dark:text-gray-300"><strong>Trámites Realizados:</strong>
-                    {{ $tipoTramite->tramites->count() }} Trámites
+                    {{ $tipoTramite->tramites->count() }}
+                    {{ $tipoTramite->tramites->count() > 1 ? 'trámites' : 'trámite' }}
                 </p>
             </div>
             <button title="Editar el tipo de tramite" wire:click="editar({{ $tipoTramite->id }})"
@@ -65,14 +66,14 @@
                             <td class="px-4 py-3" colspan="5">No hay registros</td>
                         </tr>
                     @endif
-                    @foreach ($tipoTramite->tramites->take(5) as $tramite)
+                    @foreach ($tipoTramite->tramites->sortByDesc('fecha')->take(5) as $tramite)
                         <tr class="text-gray-700 dark:text-gray-400 text-center">
-                            <td class="px-4 py-3 font-semibold w-1/12">{{ $tramite->id }}</td>
+                            <td class="px-4 py-3 font-semibold w-1/12">{{ $loop->iteration }}</td>
                             <td class="px-4 py-3 w-4/12">{{ $tramite->cliente->nombres }}
                                 {{ $tramite->cliente->apellidos }}</td>
                             <td class="px-4 py-3 w-2/12">Q. {{ $tramite->gastos }}</td>
                             <td class="px-4 py-3 w-3/12">{{ $tramite->tipoTramite->nombre }}</td>
-                            <td class="px-4 py-3 font-semibold w-2/12">{{ $tramite->fecha }}</td>
+                            <td class="px-4 py-3 font-semibold w-2/12">{{ date('d/m/Y', strtotime($tramite->fecha)) }}</td>
                         </tr>
                     @endforeach
                 </tbody>

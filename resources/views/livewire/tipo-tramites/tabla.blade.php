@@ -1,6 +1,6 @@
 <div>
     <!-- Agregar cliente -->
-    <a class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-teal-100 bg-teal-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-teal cursor-pointer hover:bg-teal-700 transition-colors duration-150 border border-transparent"
+    <a class="flex items-center justify-between p-4 mb-8 font-semibold text-teal-100 bg-teal-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-teal cursor-pointer hover:bg-teal-700 transition-colors duration-150 border border-transparent"
         wire:click="crear">
         <div class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -27,7 +27,8 @@
                     <tr
                         class="text-xs font-semibold tracking-widest text-center text-gray-500 uppercase border-b-2  dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                         <th class="px-4 py-3 w-2/12">No.</th>
-                        <th class="px-4 py-3 w-6/12">Nombre</th>
+                        <th class="px-4 py-3 w-4/12">Nombre</th>
+                        <th class="px-4 py-3 w-2/12">Cantidad de trámites</th>
                         <th class="px-4 py-3 w-4/12">Acciones</th>
                     </tr>
                 </thead>
@@ -35,8 +36,9 @@
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                     @foreach ($tipoTramites as $tipoTramite)
                         <tr class="text-gray-700 dark:text-gray-400 text-center">
-                            <td class="px-4 py-3 font-semibold w-2/12">{{ $tipoTramite->id }}</td>
-                            <td class="px-4 py-3 font-semibold w-6/12">{{ $tipoTramite->nombre }}</td>
+                            <td class="px-4 py-3 font-semibold w-2/12">{{ $loop->iteration }}</td>
+                            <td class="px-4 py-3 font-semibold w-4/12">{{ $tipoTramite->nombre }}</td>
+                            <td class="px-4 py-3 w-2/12">{{ $tipoTramite->tramites->count() }}</td>
                             <td class="px-4 py-3 w-4/12">
                                 <div class="flex items-center justify-center space-x-2 text-sm">
                                     <a title="Ver información del tipo de trámite"
