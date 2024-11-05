@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Livewire\Volt\Component;
 
-new class extends Component
-{
+new class extends Component {
     public string $nombres = '';
+    public string $apellidos = '';
     public string $email = '';
 
     /**
@@ -17,6 +17,7 @@ new class extends Component
     public function mount(): void
     {
         $this->nombres = Auth::user()->nombres;
+        $this->apellidos = Auth::user()->apellidos;
         $this->email = Auth::user()->email;
     }
 
@@ -29,6 +30,7 @@ new class extends Component
 
         $validated = $this->validate([
             'nombres' => ['required', 'string', 'max:255'],
+            'apellidos' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
         ]);
 
@@ -75,22 +77,32 @@ new class extends Component
 
     <form wire:submit="updateProfileInformation" class="mt-6 space-y-6">
         <div>
-            <x-input-label for="nombres" :value="__('nombres')" />
-            <x-text-input wire:model="nombres" id="nombres" name="name" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <x-input-label for="nombres" :value="__('Nombres')" />
+            <x-text-input wire:model="nombres" id="nombres" name="nombres" type="text" class="mt-1 block w-full"
+                required autofocus autocomplete="nombres" />
+            <x-input-error class="mt-2" :messages="$errors->get('nombres')" />
+        </div>
+
+        <div>
+            <x-input-label for="apellidos" :value="__('Apellidos')" />
+            <x-text-input wire:model="apellidos" id="apellidos" name="apellidos" type="text"
+                class="mt-1 block w-full" required autocomplete="apellidos" />
+            <x-input-error class="mt-2" :messages="$errors->get('apellidos')" />
         </div>
 
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" name="email" type="email" class="mt-1 block w-full" required autocomplete="username" />
+            <x-text-input wire:model="email" id="email" name="email" type="email" class="mt-1 block w-full"
+                required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
-            @if (auth()->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! auth()->user()->hasVerifiedEmail())
+            @if (auth()->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !auth()->user()->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
                         {{ __('Your email address is unverified.') }}
 
-                        <button wire:click.prevent="sendVerification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                        <button wire:click.prevent="sendVerification"
+                            class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
                             {{ __('Click here to re-send the verification email.') }}
                         </button>
                     </p>

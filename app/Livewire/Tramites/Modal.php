@@ -108,7 +108,8 @@ class Modal extends Component
     public function render()
     {
         $tiposTramites = TipoTramite::all();
-        $clientes = Cliente::all();
+        // clientes activos
+        $clientes = Cliente::where('estado', 1)->get();
         return view('livewire.tramites.modal', [
             'tiposTramites' => $tiposTramites,
             'clientes' => $clientes

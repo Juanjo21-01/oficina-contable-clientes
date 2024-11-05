@@ -16,14 +16,34 @@ new class extends Component {
             'password' => ['required', 'string', 'current_password'],
         ]);
 
-        tap(Auth::user(), $logout(...))->delete();
+        $user = Auth::user();
+
+        // Verificar si el usuario tiene clientes
+        if ($user->clientes->count() > 0) {
+            toastr()->addWarning('¡Tienes clientes asociados!', [
+                'positionClass' => 'toast-bottom-right',
+                'closeButton' => true,
+            ]);
+            return;
+        }
+
+        // Verificar si el usuario tiene trámites
+        if ($user->tramites->count() > 0) {
+            toastr()->addWarning('¡Tienes trámites asociados!', [
+                'positionClass' => 'toast-bottom-right',
+                'closeButton' => true,
+            ]);
+            return;
+        }
+
+        tap($user, $logout(...))->delete();
 
         $this->redirect('/', navigate: true);
     }
 }; ?>
 
-<section class="space-y-6">
-    <header>
+<section class="space-y-6 flex flex-col items-center justify-center">
+    <header class="text-center">
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('Delete Account') }}
         </h2>

@@ -24,6 +24,14 @@ class Tabla extends Component
     // Abrir modal
     public function modalEliminar($clienteId)
     {
+        // Solo los administradores pueden eliminar clientes
+        if (Auth::user()->role->nombre !== 'Administrador') {
+            return toastr()->addError('¡No tienes permiso para eliminar clientes!', [
+                'positionClass' => 'toast-bottom-right',
+                'closeButton' => true,
+            ]);
+        }
+
         $this->password = '';
         $this->clearError('password');
 
@@ -54,7 +62,7 @@ class Tabla extends Component
     // Eliminar
     public function eliminar()
     {
-       try {
+        try {
             // Validar contraseña
             if (!Hash::check($this->password, Auth::user()->password)) {
                 $this->addError('password', 'La contraseña es incorrecta.');

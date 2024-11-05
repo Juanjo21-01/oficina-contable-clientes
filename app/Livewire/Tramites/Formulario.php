@@ -83,7 +83,8 @@ class Formulario extends Component
     public function render()
     {
         $tiposTramites = TipoTramite::all();
-        $clientes = Cliente::all();
+        // Clientes activos
+        $clientes = Cliente::where('estado', 1)->get();
         return view('livewire.tramites.formulario', [
             'tiposTramites' => $tiposTramites,
             'clientes' => $clientes

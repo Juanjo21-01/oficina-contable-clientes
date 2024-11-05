@@ -4,6 +4,7 @@ namespace App\Livewire\Usuarios;
 
 use Livewire\Component;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class Detalle extends Component
 {
@@ -16,6 +17,11 @@ class Detalle extends Component
     // Constructor
     public function mount($id)
     {
+        // Solo los administradores pueden acceder
+        if (Auth::user()->role->nombre != 'Administrador') {
+            abort(403);
+        }
+
         $this->usuarioId = $id;
         $this->usuario = User::find($id);
     }
@@ -23,6 +29,14 @@ class Detalle extends Component
     // Editar
     public function editar($usuarioId)
     {
+        // Solo los administradores pueden editar
+        if (Auth::user()->role->nombre !== 'Administrador') {
+            return toastr()->addError('¡No tienes permiso para editar usuarios!', [
+                'positionClass' => 'toast-bottom-right',
+                'closeButton' => true,
+            ]);
+        }
+        
         $this->dispatch('editarUsuario', $usuarioId);
     }
 

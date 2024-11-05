@@ -27,6 +27,14 @@ class Tabla extends Component
     // Abrir modal
     public function modalEliminar($tipoTramiteId)
     {
+         // Solo los administradores pueden eliminar tipos de trámites
+        if (Auth::user()->role->nombre !== 'Administrador') {
+            return toastr()->addError('¡No tienes permiso para eliminar tipos de trámites!', [
+                'positionClass' => 'toast-bottom-right',
+                'closeButton' => true,
+            ]);
+        }
+
         $this->password = '';
         $this->clearError('password');
 

@@ -19,12 +19,25 @@ class Tabla extends Component
     // Constructor
     public function mount()
     {
+        // Solo los administradores pueden acceder
+        if (Auth::user()->role->nombre != 'Administrador') {
+            abort(403);
+        }
+
         $this->usuarios = User::all();
     }
 
     // Abrir modal
     public function modalEliminar($usuarioId)
     {
+        // Solo los administradores pueden eliminar usuarios
+        if (Auth::user()->role->nombre !== 'Administrador') {
+            return toastr()->addError('¡No tienes permiso para eliminar usuarios!', [
+                'positionClass' => 'toast-bottom-right',
+                'closeButton' => true,
+            ]);
+        }
+
         $this->password = '';
         $this->clearError('password');
 
@@ -55,6 +68,14 @@ class Tabla extends Component
     // Editar
     public function editar($usuarioId)
     {
+        // Solo los administradores pueden editar
+        if (Auth::user()->role->nombre !== 'Administrador') {
+            return toastr()->addError('¡No tienes permiso para editar usuarios!', [
+                'positionClass' => 'toast-bottom-right',
+                'closeButton' => true,
+            ]);
+        }
+        
         $this->dispatch('editarUsuario', $usuarioId);
     }
     

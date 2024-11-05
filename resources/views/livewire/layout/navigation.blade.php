@@ -44,62 +44,64 @@ new class extends Component {
         <!-- Enlaces -->
         <ul>
             {{-- Usuarios ✅ --}}
-            <li class="relative px-6 py-3">
-                @if (request()->routeIs('roles') || request()->routeIs('usuarios.index') || request()->routeIs('usuarios.mostrar'))
-                    <span class="absolute inset-y-0 left-0 w-1 bg-teal-600 rounded-tr-lg rounded-br-lg"
-                        aria-hidden="true"></span>
-                @endif
-                <button
-                    class="inline-flex items-center justify-between w-full text-base transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('roles') || request()->routeIs('usuarios') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
-                    @click="togglePagesMenuUsuarios" aria-haspopup="true">
-                    <span class="inline-flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+            @if (Auth::user()->role->nombre == 'Administrador')
+                <li class="relative px-6 py-3">
+                    @if (request()->routeIs('roles') || request()->routeIs('usuarios.index') || request()->routeIs('usuarios.mostrar'))
+                        <span class="absolute inset-y-0 left-0 w-1 bg-teal-600 rounded-tr-lg rounded-br-lg"
+                            aria-hidden="true"></span>
+                    @endif
+                    <button
+                        class="inline-flex items-center justify-between w-full text-base transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('roles') || request()->routeIs('usuarios') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
+                        @click="togglePagesMenuUsuarios" aria-haspopup="true">
+                        <span class="inline-flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                            </svg>
+                            <span class="ml-4">Usuarios</span>
+                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                            <path fill-rule="evenodd"
+                                d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                                clip-rule="evenodd" />
                         </svg>
-                        <span class="ml-4">Usuarios</span>
-                    </span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                        <path fill-rule="evenodd"
-                            d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </button>
-                <template x-if="isPagesMenuUsuariosOpen">
-                    <ul x-transition:enter="transition-all ease-in-out duration-300"
-                        x-transition:enter-start="opacity-25 max-h-0" x-transition:enter-end="opacity-100 max-h-xl"
-                        x-transition:leave="transition-all ease-in-out duration-300"
-                        x-transition:leave-start="opacity-100 max-h-xl" x-transition:leave-end="opacity-0 max-h-0"
-                        class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-zinc-500 rounded-md shadow-inner bg-gray-50 dark:text-zinc-400 dark:bg-gray-900"
-                        aria-label="submenu">
-                        <li
-                            class="px-2 py-1 transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200">
-                            <a class="inline-flex items-center w-full text-base font-semibold transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('roles') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
-                                href="{{ route('roles') }}" wire:navigate>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                </svg>
-                                <span class="ml-4">Roles</span>
-                            </a>
-                        </li>
-                        <li
-                            class="px-2 py-1 transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200">
-                            <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('usuarios.index') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
-                                href="{{ route('usuarios.index') }}" wire:navigate>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
-                                </svg>
-                                <span class="ml-4">Usuarios</span>
-                            </a>
-                        </li>
-                    </ul>
-                </template>
-            </li>
+                    </button>
+                    <template x-if="isPagesMenuUsuariosOpen">
+                        <ul x-transition:enter="transition-all ease-in-out duration-300"
+                            x-transition:enter-start="opacity-25 max-h-0" x-transition:enter-end="opacity-100 max-h-xl"
+                            x-transition:leave="transition-all ease-in-out duration-300"
+                            x-transition:leave-start="opacity-100 max-h-xl" x-transition:leave-end="opacity-0 max-h-0"
+                            class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-zinc-500 rounded-md shadow-inner bg-gray-50 dark:text-zinc-400 dark:bg-gray-900"
+                            aria-label="submenu">
+                            <li
+                                class="px-2 py-1 transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200">
+                                <a class="inline-flex items-center w-full text-base font-semibold transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('roles') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
+                                    href="{{ route('roles') }}" wire:navigate>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    </svg>
+                                    <span class="ml-4">Roles</span>
+                                </a>
+                            </li>
+                            <li
+                                class="px-2 py-1 transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200">
+                                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('usuarios.index') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
+                                    href="{{ route('usuarios.index') }}" wire:navigate>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                                    </svg>
+                                    <span class="ml-4">Usuarios</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </template>
+                </li>
+            @endif
             {{-- Tramites ✅ --}}
             <li class="relative px-6 py-3">
                 @if (request()->routeIs('tipo-tramites.index') ||
@@ -111,7 +113,7 @@ new class extends Component {
                         aria-hidden="true"></span>
                 @endif
                 <button
-                    class="inline-flex items-center justify-between w-full text-base transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('tipo-tramites.index') ||
+                    class="inline-flex items-center justify-between w-full text-sm transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('tipo-tramites.index') ||
                     request()->routeIs('tipo-tramites.mostrar') ||
                     request()->routeIs('tramites.index') ||
                     request()->routeIs('tramites.crear') ||
@@ -243,7 +245,7 @@ new class extends Component {
                     </ul>
                 </template>
             </li>
-            {{-- Reportes --}}
+            {{-- Reportes ✅ --}}
             <li class="relative px-6 py-3">
                 @if (request()->routeIs('reportes.index'))
                     <span class="absolute inset-y-0 left-0 w-1 bg-teal-600 rounded-tr-lg rounded-br-lg"
@@ -316,23 +318,25 @@ new class extends Component {
                 </template>
             </li>
             {{-- Bitacora --}}
-            <li class="relative px-6 py-3">
-                @if (request()->routeIs('dashboard'))
-                    <span class="absolute inset-y-0 left-0 w-1 bg-teal-600 rounded-tr-lg rounded-br-lg"
-                        aria-hidden="true"></span>
-                @endif
-                <a class="inline-flex items-center w-full text-base transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('dashboard') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
-                    href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-                    </svg>
+            @if (Auth::user()->role->nombre == 'Administrador')
+                <li class="relative px-6 py-3">
+                    @if (request()->routeIs('dashboard'))
+                        <span class="absolute inset-y-0 left-0 w-1 bg-teal-600 rounded-tr-lg rounded-br-lg"
+                            aria-hidden="true"></span>
+                    @endif
+                    <a class="inline-flex items-center w-full text-base transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('dashboard') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
+                        href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                        </svg>
 
 
-                    <span class="ml-4">Bitácora</span>
-                </a>
-            </li>
+                        <span class="ml-4">Bitácora</span>
+                    </a>
+                </li>
+            @endif
         </ul>
 
         {{-- Cerrar Sesión --}}

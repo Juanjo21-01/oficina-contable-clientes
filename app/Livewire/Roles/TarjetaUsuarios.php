@@ -34,7 +34,7 @@ class TarjetaUsuarios extends Component
         $this->roles = Role::all();
     }
 
-    // Cerrar vista 
+    // Cerrar vista
     public function cerrarUsuarios()
     {
         $this->verUsuarios = false;
