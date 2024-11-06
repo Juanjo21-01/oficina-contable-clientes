@@ -4,118 +4,127 @@
             <div class="bg-red-500 text-white p-2 rounded mb-4 text-sm">{{ $errorMessage }}</div>
         @endif
 
-        <!-- Agrupar los campos en una grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <!-- Nombres -->
-            <div>
-                <x-input-label for="nombres" :value="__('Nombres')" />
-                <x-text-input wire:model="nombres" id="nombres"
-                    class="block w-full mt-1 px-3 py-1 {{ $errors->has('nombres') ? 'border-red-600 focus:border-red-400 dark:border-red-400' : '' }}"
-                    type="text" name="nombres" autofocus wire:keydown="clearError('nombres')" />
-                @error('nombres')
-                    <span class="text-sm text-red-600 dark:text-red-400">
-                        {{ $message }}
-                    </span>
-                @enderror
-            </div>
+        <!-- Tarjeta de Información Principal -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md pt-3 pb-4 px-6 mb-4 border-2 dark:border-gray-700">
+            <h3 class="text-xl font-semibold text-teal-600 dark:text-teal-400 mb-4 text-center">Información Principal
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Nombres -->
+                <div>
+                    <x-input-label for="nombres" :value="__('Nombres')" />
+                    <x-text-input wire:model="nombres" id="nombres"
+                        class="block w-full mt-1 px-3 py-1 {{ $errors->has('nombres') ? 'border-red-600 focus:border-red-400 dark:border-red-400' : '' }}"
+                        type="text" name="nombres" autofocus wire:keydown="clearError('nombres')" />
+                    @error('nombres')
+                        <span class="text-sm text-red-600 dark:text-red-400">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
 
-            <!-- DPI -->
-            <div>
-                <x-input-label for="dpi" :value="__('DPI')" />
-                <x-text-input wire:model="dpi" id="dpi"
-                    class="block w-full mt-1 px-3 py-1 {{ $errors->has('dpi') ? 'border-red-600 focus:border-red-400 dark:border-red-400' : '' }}"
-                    type="text" name="dpi" wire:keydown="clearError('dpi')" />
-                @error('dpi')
-                    <span class="text-sm text-red-600 dark:text-red-400">
-                        {{ $message }}
-                    </span>
-                @enderror
-            </div>
+                <!-- Apellidos -->
+                <div>
+                    <x-input-label for="apellidos" :value="__('Apellidos')" />
+                    <x-text-input wire:model="apellidos" id="apellidos"
+                        class="block w-full mt-1 px-3 py-1 {{ $errors->has('apellidos') ? 'border-red-600 focus:border-red-400 dark:border-red-400' : '' }}"
+                        type="text" name="apellidos" wire:keydown="clearError('apellidos')" />
+                    @error('apellidos')
+                        <span class="text-sm text-red-600 dark:text-red-400">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
 
-            <!-- Apellidos -->
-            <div>
-                <x-input-label for="apellidos" :value="__('Apellidos')" />
-                <x-text-input wire:model="apellidos" id="apellidos"
-                    class="block w-full mt-1 px-3 py-1 {{ $errors->has('apellidos') ? 'border-red-600 focus:border-red-400 dark:border-red-400' : '' }}"
-                    type="text" name="apellidos" wire:keydown="clearError('apellidos')" />
-                @error('apellidos')
-                    <span class="text-sm text-red-600 dark:text-red-400">
-                        {{ $message }}
-                    </span>
-                @enderror
-            </div>
+                <!-- Dirección -->
+                <div>
+                    <x-input-label for="direccion" :value="__('Dirección')" />
+                    <x-text-input wire:model="direccion" id="direccion"
+                        class="block w-full mt-1 px-3 py-1 {{ $errors->has('direccion') ? 'border-red-600 focus:border-red-400 dark:border-red-400' : '' }}"
+                        type="text" name="direccion" wire:keydown="clearError('direccion')" />
+                    @error('direccion')
+                        <span class="text-sm text-red-600 dark:text-red-400">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
 
-            <!-- NIT -->
-            <div>
-                <x-input-label for="nit" :value="__('NIT')" />
-                <x-text-input wire:model="nit" id="nit"
-                    class="block w-full mt-1 px-3 py-1 {{ $errors->has('nit') ? 'border-red-600 focus:border-red-400 dark:border-red-400' : '' }}"
-                    type="text" name="nit" wire:keydown="clearError('nit')" />
-                @error('nit')
-                    <span class="text-sm text-red-600 dark:text-red-400">
-                        {{ $message }}
-                    </span>
-                @enderror
-            </div>
-
-            <!-- Dirección -->
-            <di>
-                <x-input-label for="direccion" :value="__('Dirección')" />
-                <x-text-input wire:model="direccion" id="direccion"
-                    class="block w-full mt-1 px-3 py-1 {{ $errors->has('direccion') ? 'border-red-600 focus:border-red-400 dark:border-red-400' : '' }}"
-                    type="text" name="direccion" wire:keydown="clearError('direccion')" />
-                @error('direccion')
-                    <span class="text-sm text-red-600 dark:text-red-400">
-                        {{ $message }}
-                    </span>
-                @enderror
-            </di>
-
-            <!-- Teléfono -->
-            <div>
-                <x-input-label for="telefono" :value="__('Teléfono')" />
-                <x-text-input wire:model="telefono" id="telefono"
-                    class="block w-full mt-1 px-3 py-1 {{ $errors->has('telefono') ? 'border-red-600 focus:border-red-400 dark:border-red-400' : '' }}"
-                    type="text" name="telefono" wire:keydown="clearError('telefono')" />
-                @error('telefono')
-                    <span class="text-sm text-red-600 dark:text-red-400">
-                        {{ $message }}
-                    </span>
-                @enderror
-            </div>
-
-            <!-- Tipo de Cliente -->
-            <div>
-                <x-input-label for="tipo_cliente_id" :value="__('Tipo de Cliente')" />
-                <select wire:model="tipoClienteId" id="tipo_cliente_id"
-                    class="block w-full mt-1 px-3 py-1 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-teal-400 dark:focus:border-teal-600 focus:outline-none focus:shadow-outline-teal rounded-md shadow-sm form-select {{ $errors->has('tipoClienteId') ? 'border-red-600 focus:border-red-400 dark:border-red-400' : '' }}"
-                    name="tipoClienteId" wire:click="clearError('tipoClienteId')">
-                    <option value="">Seleccione un tipo de cliente</option>
-                    @foreach ($tipoClientes as $tipoCliente)
-                        <option value="{{ $tipoCliente->id }}">{{ $tipoCliente->nombre }}</option>
-                    @endforeach
-                </select>
-                @error('tipoClienteId')
-                    <span class="text-sm text-red-600 dark:text-red-400">
-                        {{ $message }}
-                    </span>
-                @enderror
-            </div>
-
-            <!-- Email -->
-            <div>
-                <x-input-label for="email" :value="__('Correo Electrónico')" />
-                <x-text-input wire:model="email" id="email"
-                    class="block w-full mt-1 px-3 py-1 {{ $errors->has('email') ? 'border-red-600 focus:border-red-400 dark:border-red-400' : '' }}"
-                    type="email" name="email" wire:keydown="clearError('email')" />
-                @error('email')
-                    <span class="text-sm text-red-600 dark:text-red-400">
-                        {{ $message }}
-                    </span>
-                @enderror
+                <!-- Teléfono -->
+                <div>
+                    <x-input-label for="telefono" :value="__('Teléfono')" />
+                    <x-text-input wire:model="telefono" id="telefono"
+                        class="block w-full mt-1 px-3 py-1 {{ $errors->has('telefono') ? 'border-red-600 focus:border-red-400 dark:border-red-400' : '' }}"
+                        type="text" name="telefono" wire:keydown="clearError('telefono')" />
+                    @error('telefono')
+                        <span class="text-sm text-red-600 dark:text-red-400">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
             </div>
         </div>
 
+        <!-- Tarjeta de Datos Fiscales -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md pt-3 pb-4 px-6 mb-4 border-2 dark:border-gray-700">
+            <h3 class="text-xl font-semibold text-teal-600 dark:text-teal-400 mb-4 text-center">Datos Fiscales</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- DPI -->
+                <div>
+                    <x-input-label for="dpi" :value="__('DPI')" />
+                    <x-text-input wire:model="dpi" id="dpi"
+                        class="block w-full mt-1 px-3 py-1 {{ $errors->has('dpi') ? 'border-red-600 focus:border-red-400 dark:border-red-400' : '' }}"
+                        type="text" name="dpi" wire:keydown="clearError('dpi')" />
+                    @error('dpi')
+                        <span class="text-sm text-red-600 dark:text-red-400">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
+                <!-- NIT -->
+                <div>
+                    <x-input-label for="nit" :value="__('NIT')" />
+                    <x-text-input wire:model="nit" id="nit"
+                        class="block w-full mt-1 px-3 py-1 {{ $errors->has('nit') ? 'border-red-600 focus:border-red-400 dark:border-red-400' : '' }}"
+                        type="text" name="nit" wire:keydown="clearError('nit')" />
+                    @error('nit')
+                        <span class="text-sm text-red-600 dark:text-red-400">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
+                <!-- Tipo de Cliente -->
+                <div>
+                    <x-input-label for="tipo_cliente_id" :value="__('Tipo de Cliente')" />
+                    <select wire:model="tipoClienteId" id="tipo_cliente_id"
+                        class="block w-full mt-1 px-3 py-1 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-teal-400 dark:focus:border-teal-600 focus:outline-none focus:shadow-outline-teal rounded-md shadow-sm form-select {{ $errors->has('tipoClienteId') ? 'border-red-600 focus:border-red-400 dark:border-red-400' : '' }}"
+                        name="tipoClienteId" wire:click="clearError('tipoClienteId')">
+                        <option value="">Seleccione un tipo de cliente</option>
+                        @foreach ($tipoClientes as $tipoCliente)
+                            <option value="{{ $tipoCliente->id }}">{{ $tipoCliente->nombre }}</option>
+                        @endforeach
+                    </select>
+                    @error('tipoClienteId')
+                        <span class="text-sm text-red-600 dark:text-red-400">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <x-input-label for="email" :value="__('Correo Electrónico')" />
+                    <x-text-input wire:model="email" id="email"
+                        class="block w-full mt-1 px-3 py-1 {{ $errors->has('email') ? 'border-red-600 focus:border-red-400 dark:border-red-400' : '' }}"
+                        type="email" name="email" wire:keydown="clearError('email')" />
+                    @error('email')
+                        <span class="text-sm text-red-600 dark:text-red-400">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+            </div>
+        </div>
         <!-- Botones -->
         <div
             class="flex flex-col items-center text-center justify-center p-6 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row">

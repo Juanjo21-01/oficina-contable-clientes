@@ -2,7 +2,8 @@
     @if (Auth::user()->role->nombre == 'Administrador')
         <div class="p-6 space-y-8">
             <!-- Tarjeta de perfil del usuario -->
-            <div class="flex items-center p-4 bg-white dark:bg-gray-800 dark:border-gray-700 rounded-lg shadow-md">
+            <div
+                class="flex items-center p-4 bg-white dark:bg-gray-800 border-2 dark:border-gray-700 rounded-lg shadow-md">
                 <div class="space-y-2 w-full ">
                     <h2 class="text-2xl font-semibold text-teal-600">{{ $usuario->nombres }} {{ $usuario->apellidos }}
                     </h2>
@@ -36,7 +37,7 @@
             </div>
 
             <!-- Espacio para estadísticas -->
-            <div class="bg-white rounded-lg shadow-md p-4 dark:bg-gray-800">
+            <div class="bg-white rounded-lg shadow-md p-4 dark:bg-gray-800 border-2 dark:border-gray-700">
                 <h3 class="text-2xl font-semibold text-teal-600 dark:text-teal-400">Estadísticas</h3>
                 <p class="text-gray-600 mb-4 dark:text-gray-400">Gráfica de la cantidad de clientes registrados y
                     trámites realizados</p>
@@ -46,7 +47,7 @@
             </div>
 
             <!-- Tabla de Clientes Relacionados -->
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 border-2 dark:border-gray-700">
                 <div class="flex justify-between">
                     <h3 class="text-xl font-semibold text-teal-600 dark:text-teal-400 p-2">Últimos Clientes Registrados
                     </h3>
@@ -98,7 +99,7 @@
             </div>
 
             <!-- Tabla de Trámites Relacionados -->
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 border-2 dark:border-gray-700">
                 <div class="flex justify-between">
                     <h3 class="text-xl font-semibold text-teal-600 dark:text-teal-400 p-2">Últimos Trámites Realizados
                     </h3>

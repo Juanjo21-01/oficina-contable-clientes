@@ -113,7 +113,7 @@
                             <select wire:model="tipoClienteId" id="tipo_cliente_id"
                                 class="block w-full mt-1 px-3 py-1 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-teal-400 dark:focus:border-teal-600 focus:outline-none focus:shadow-outline-teal rounded-md shadow-sm form-select {{ $errors->has('tipoClienteId') ? 'border-red-600 focus:border-red-400 dark:border-red-400' : '' }}"
                                 name="tipoClienteId" wire:click="clearError('tipoClienteId')">
-                                <option value="">Seleccione un tipo de cliente</option>
+                                <option value="" selected disabled>Seleccione un tipo de cliente</option>
                                 @foreach ($tipoClientes as $tipoCliente)
                                     <option value="{{ $tipoCliente->id }}">{{ $tipoCliente->nombre }}</option>
                                 @endforeach

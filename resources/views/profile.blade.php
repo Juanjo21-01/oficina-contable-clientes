@@ -1,17 +1,19 @@
 <x-app-layout>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div
-                class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg flex items-center justify-center gap-5">
-                <div class="border-2 border-gray-200 dark:border-gray-700 rounded-md p-5 shadow-md">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                <div
+                    class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg border-2 border-gray-200 dark:border-gray-700 rounded-md">
                     <livewire:profile.update-profile-information-form />
                 </div>
-                <div class="border-2 border-gray-200 dark:border-gray-700 rounded-md p-5 shadow-md">
+                <div
+                    class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg border-2 border-gray-200 dark:border-gray-700 rounded-md">
                     <livewire:profile.update-password-form />
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg border-2 dark:border-gray-700">
                 <div class="max-w-7xl mx-auto space-y-4">
                     <!-- Espacio para estadísticas -->
                     <h3 class="text-2xl font-semibold text-teal-600 dark:text-teal-400">Estadísticas</h3>
@@ -23,7 +25,7 @@
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg border-2 dark:border-gray-700">
                 <div class="max-w-7xl mx-auto space-y-4">
                     <!-- Tabla de Clientes Relacionados -->
                     <div class="flex justify-between">
@@ -79,7 +81,7 @@
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg border-2 dark:border-gray-700">
                 <div class="max-w-7xl mx-auto space-y-4">
                     <!-- Tabla de Trámites Relacionados -->
                     <div class="flex justify-between">
@@ -130,7 +132,8 @@
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg max-w-xl mx-auto">
+            <div
+                class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg max-w-xl mx-auto border-2 dark:border-gray-700">
                 <livewire:profile.delete-user-form />
             </div>
         </div>

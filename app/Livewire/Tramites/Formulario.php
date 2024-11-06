@@ -13,6 +13,8 @@ class Formulario extends Component
     public $fecha, $precio, $gastos = 0, $observaciones, $tipoTramiteId, $clienteId;
     public $tramiteId = null;
     public $errorMessage;
+    public $buscarCliente = '', $buscarTipoTramite = '';
+    public $clientes = [], $tiposTramites = [];
 
     // Eventos
     protected $listeners = ['cargarTramite'];
@@ -23,6 +25,10 @@ class Formulario extends Component
         if ($tramiteId) {
             $this->cargarTramite($tramiteId);
         }
+
+        // Clientes activos
+        $this->clientes = Cliente::where('estado', 1)->get();
+        $this->tiposTramites = TipoTramite::all();
     }
 
     // Guardar
@@ -80,14 +86,29 @@ class Formulario extends Component
         $this->resetErrorBag($field);
     }
 
+    // Buscar cliente
+    public function updatedBuscarCliente()
+    {
+        $this->clientes = Cliente::where('estado', 1)
+            ->where(function($query) {
+                $query->where('nombres', 'like', '%' . $this->buscarCliente . '%')
+                ->orWhere('apellidos', 'like', '%' . $this->buscarCliente . '%');
+            })
+            ->get();
+    }
+
+    // Buscar tipo de trámite
+    public function updatedBuscarTipoTramite()
+    {
+        $this->tiposTramites = TipoTramite::where('nombre', 'like', '%' . $this->buscarTipoTramite . '%')
+            ->get();
+    }
+
     public function render()
     {
-        $tiposTramites = TipoTramite::all();
-        // Clientes activos
-        $clientes = Cliente::where('estado', 1)->get();
         return view('livewire.tramites.formulario', [
-            'tiposTramites' => $tiposTramites,
-            'clientes' => $clientes
+            'tiposTramites' => $this->tiposTramites,
+            'clientes' => $this->clientes
         ]);
     }
 }

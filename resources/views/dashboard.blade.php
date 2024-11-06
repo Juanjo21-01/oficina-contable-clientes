@@ -3,16 +3,26 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
             <!-- Bienvenida -->
-            <div class="bg-white rounded-lg shadow-md p-4 dark:bg-gray-800">
-                <h3 class="text-2xl font-semibold text-teal-600 dark:text-teal-400">¿Qué quieres hacer?</h3>
-                <p class="text-gray-600 dark:text-gray-400">Selecciona una de las opciones a continuación para comenzar
-                    a trabajar.</p>
+            <div
+                class="bg-white rounded-lg shadow-md p-4 dark:bg-gray-800 border-2 dark:border-gray-700 flex items-center justify-between">
+                <div>
+                    <h3 class="text-2xl font-semibold text-teal-600 dark:text-teal-400">¿Qué quieres hacer?</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Selecciona una de las opciones a continuación para
+                        comenzar a trabajar.</p>
+                </div>
+                <!-- Reloj -->
+                <div class="mt-4 flex items-center justify-center">
+                    <div class="text-center">
+                        <p id="current-time" class="text-2xl font-bold text-teal-600 dark:text-teal-400"></p>
+                        <p id="current-date" class="text-lg font-semibold text-gray-700 dark:text-gray-300"></p>
+                    </div>
+                </div>
             </div>
 
             <!-- Enlaces rápidos -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6  ">
                 <a href="{{ route('tramites.crear') }}"
-                    class="bg-teal-600 text-white rounded-lg shadow-md p-4 flex items-center justify-between hover:bg-teal-700">
+                    class="bg-teal-600 text-white rounded-lg shadow-md p-4 flex items-center justify-between hover:bg-teal-700 ">
                     <div>
                         <h3 class="text-2xl font-semibold">Agregar Trámite</h3>
                         <p class="text-gray-200">Registrar un nuevo trámite</p>
@@ -50,7 +60,8 @@
 
             <!-- Resumen de estadísticas -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="flex items-center p-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
+                <div
+                    class="flex items-center p-4 bg-white rounded-lg shadow-md dark:bg-gray-800 border-2 dark:border-gray-700">
                     <div
                         class="p-3 mr-4 text-purple-500 bg-purple-100 rounded-full dark:text-purple-100 dark:bg-purple-500">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -68,7 +79,8 @@
                         </p>
                     </div>
                 </div>
-                <div class="flex items-center p-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
+                <div
+                    class="flex items-center p-4 bg-white rounded-lg shadow-md dark:bg-gray-800 border-2 dark:border-gray-700">
                     <div class="p-3 mr-4 text-rose-500 bg-rose-100 rounded-full dark:text-rose-100 dark:bg-rose-500">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
@@ -85,7 +97,8 @@
                         </p>
                     </div>
                 </div>
-                <div class="flex items-center p-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
+                <div
+                    class="flex items-center p-4 bg-white rounded-lg shadow-md dark:bg-gray-800 border-2 dark:border-gray-700">
                     <div class="p-3 mr-4 text-teal-500 bg-teal-100 rounded-full dark:text-teal-100 dark:bg-teal-500">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd"
@@ -105,7 +118,7 @@
             </div>
 
             <!-- Estadísticas -->
-            <div class="bg-white rounded-lg shadow-md p-4 dark:bg-gray-800">
+            <div class="bg-white rounded-lg shadow-md p-4 dark:bg-gray-800 border-2 dark:border-gray-700">
                 <h3 class="text-2xl font-semibold text-teal-600 dark:text-teal-400">Estadísticas</h3>
                 <p class="text-gray-600 mb-4 dark:text-gray-400">Gráfica de la cantidad de clientes registrados y
                     trámites realizados</p>
@@ -117,7 +130,7 @@
             <!-- Últimos Registros -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Últimos Trámites -->
-                <div class="bg-white rounded-lg shadow-md p-4 dark:bg-gray-800">
+                <div class="bg-white rounded-lg shadow-md p-4 dark:bg-gray-800 border-2 dark:border-gray-700">
                     <h3 class="text-xl font-semibold text-teal-600 dark:text-teal-400">Últimos Trámites</h3>
                     <ul class="mt-4 space-y-2">
                         @foreach ($ultimosTramites as $tramite)
@@ -140,7 +153,7 @@
                 </div>
 
                 <!-- Últimos Clientes -->
-                <div class="bg-white rounded-lg shadow-md p-4 dark:bg-gray-800">
+                <div class="bg-white rounded-lg shadow-md p-4 dark:bg-gray-800 border-2 dark:border-gray-700">
                     <h3 class="text-xl font-semibold text-teal-600 dark:text-teal-400">Últimos Clientes</h3>
                     <ul class="mt-4 space-y-2">
                         @foreach ($ultimosClientes as $cliente)
@@ -163,4 +176,27 @@
             </div>
         </div>
     </div>
+
+    <!-- Script para actualizar la hora -->
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const date = now.toLocaleDateString('es-ES', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            const time = now.toLocaleTimeString('es-ES', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+
+            document.getElementById('current-date').textContent = date;
+            document.getElementById('current-time').textContent = time;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
 </x-app-layout>

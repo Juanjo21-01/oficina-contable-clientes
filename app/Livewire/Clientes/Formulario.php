@@ -16,6 +16,7 @@ class Formulario extends Component
     public $correo, $contrasenia, $observaciones;
     public $errorMessage;
 
+
     // Eventos
     protected $listeners = ['cargarCliente'];
 

@@ -1,7 +1,7 @@
 <div>
     <div class="p-6 space-y-5">
         <!-- Tarjeta de perfil del tramite -->
-        <div class="flex items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+        <div class="flex items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md border-2 dark:border-gray-700">
             <div class="space-y-2 w-full">
                 <h2 class="text-2xl font-semibold text-teal-600 dark:text-teal-400">{{ $tramite->cliente->nombres }}
                     {{ $tramite->cliente->apellidos }}
@@ -45,7 +45,7 @@
 
         <hr class="border-t dark:border-gray-700">
 
-        <div class="max-w-xs mx-auto flex items-center justify-center border-b dark:border-gray-700">
+        <div class="max-w-xs mx-auto flex items-center justify-center border-b-2 dark:border-gray-700">
             <!-- Recibo del tramite -->
             <a title="Descargar el trámite" href="{{ route('tramites.pdf', $tramite->id) }}"
                 class="px-4 py-2 text-orange-600 dark:text-orange-400 rounded-lg focus:outline-none hover:border hover:border-orange-600 border border-transparent flex items-center gap-1 ">
@@ -60,7 +60,7 @@
 
         <hr class="border-t dark:border-gray-700">
 
-        <div class="w-6/12 mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
+        <div class="w-6/12 mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 border-2 dark:border-gray-700">
             <!-- Encabezado con Logo e Información de la Empresa -->
             <div class="text-center border-b pb-4 mb-4 border-gray-200 dark:border-gray-700">
                 <!-- Logo de la Empresa -->

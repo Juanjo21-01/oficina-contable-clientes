@@ -1,7 +1,7 @@
 <div>
     <div class="p-6 space-y-8">
         <!-- Tarjeta de perfil del cliente -->
-        <div class="flex items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+        <div class="flex items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md border-2 dark:border-gray-700">
             <div class="space-y-2 w-full">
                 <h2 class="text-2xl font-semibold text-teal-600 dark:text-teal-400">{{ $cliente->nombres }}
                     {{ $cliente->apellidos }}</h2>
@@ -41,7 +41,7 @@
         </div>
 
         <!-- Agencia Virtual -->
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md border-2 dark:border-gray-700">
             <h3 class="text-xl font-semibold text-teal-600 dark:text-teal-400 mb-2">Agencia Virtual</h3>
             @if ($cliente->agenciaVirtual)
                 <div class="flex items-center">
@@ -83,7 +83,7 @@
         </div>
 
         <!-- Espacio para estadísticas -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 border-2 dark:border-gray-700">
             <h3 class="text-2xl font-semibold text-teal-600 dark:text-teal-400">Estadísticas</h3>
             <p class="text-gray-600 dark:text-gray-300 mb-4">Gráfica de la cantidad de trámites realizados</p>
             <div class="w-full h-64 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
@@ -92,7 +92,7 @@
         </div>
 
         <!-- Tabla de Trámites Relacionados -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 border-2 dark:border-gray-700">
             <div class="flex justify-between">
                 <h3 class="text-xl font-semibold text-teal-600 dark:text-teal-400 p-2">Últimos Trámites Realizados</h3>
                 <div class="flex justify-end">
