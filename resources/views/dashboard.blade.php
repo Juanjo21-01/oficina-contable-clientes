@@ -193,8 +193,13 @@
                 second: '2-digit'
             });
 
-            document.getElementById('current-date').textContent = date;
-            document.getElementById('current-time').textContent = time;
+            const dateElement = document.getElementById('current-date');
+            const timeElement = document.getElementById('current-time');
+
+            if (dateElement && timeElement) {
+                dateElement.textContent = date;
+                timeElement.textContent = time;
+            }
         }
         setInterval(updateTime, 1000);
         updateTime();

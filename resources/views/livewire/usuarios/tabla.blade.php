@@ -1,24 +1,27 @@
 <div>
     @if (Auth::user()->role->nombre == 'Administrador')
-        <!-- Agregar usuario -->
-        <a class="flex items-center justify-between p-4 mb-8 font-semibold text-teal-100 bg-teal-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-teal cursor-pointer hover:bg-teal-700 transition-colors duration-150 border border-transparent"
-            wire:click="crear">
-            <div class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                </svg>
 
-                <span class="pl-4">Agregar nuevo usuario</span>
-            </div>
-            <span>Vamos &RightArrow;</span>
-        </a>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 items-center">
+            <!-- Titulo-->
+            <h4 class=" text-xl font-semibold text-gray-600 dark:text-gray-300">
+                Tabla de usuarios
+            </h4>
+            <!-- Agregar usuario -->
+            <a class="flex items-center justify-center sm:justify-between p-4 font-semibold text-teal-100 bg-teal-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-teal cursor-pointer hover:bg-teal-700 transition-colors duration-150 border border-transparent"
+                wire:click="crear">
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
 
-        <!-- Titulo -->
-        <h4 class="mb-4 text-xl font-semibold text-gray-600 dark:text-gray-300">
-            Tabla de usuarios
-        </h4>
+                    <span class="pl-4 pr-1">Agregar </span>
+                    <span class="hidden md:inline"> nuevo usuario</span>
+                </div>
+                <span class="hidden sm:inline">Vamos &RightArrow;</span>
+            </a>
+        </div>
 
         <!-- Tabla de usuarios -->
         <div class="w-full overflow-hidden rounded-lg shadow-lg border mx-auto dark:border-gray-700">

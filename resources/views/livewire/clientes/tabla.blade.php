@@ -4,9 +4,10 @@
         Tabla de Clientes
     </h4>
 
-    <div class="flex flex-col sm:flex-row items-center justify-between mb-4 space-y-2 sm:space-y-0 sm:space-x-4">
+    <div
+        class="w-full flex flex-col md:flex-row items-center justify-between gap-4 mb-4 space-y-2 sm:space-y-0 sm:space-x-4">
         <!-- Agregar cliente -->
-        <a class="w-8/12 flex items-center justify-between p-4 font-semibold text-teal-100 bg-teal-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-teal cursor-pointer hover:bg-teal-700 transition-colors duration-150 border border-transparent"
+        <a class="w-full md:w-6/12 flex items-center justify-center sm:justify-between p-4 font-semibold text-teal-100 bg-teal-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-teal cursor-pointer hover:bg-teal-700 transition-colors duration-150 border border-transparent"
             href="{{ route('clientes.crear') }}" wire:navigate>
             <div class="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -14,42 +15,42 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
-
-                <span class="pl-4">Agregar nuevo cliente</span>
+                <span class="pl-4 pr-1">Agregar </span>
+                <span class="hidden md:inline"> nuevo cliente</span>
             </div>
-            <span>Vamos &RightArrow;</span>
+            <span class="hidden sm:inline">Vamos &RightArrow;</span>
         </a>
 
         <!-- Buscador y filtro -->
-        <div class="w-4/12 flex flex-col sm:flex-row items-center justify-end mb-4 space-y-2 sm:space-y-0 sm:space-x-4">
+        <div
+            class="w-full md:w-6/12 flex flex-col sm:flex-row items-center justify-end gap-2 mb-4 space-y-0 sm:space-x-4">
             <!-- Input de búsqueda -->
-            <div class="w-full sm:w-auto">
+            <div class="w-full sm:w-6/12">
                 <x-input-label for="search" :value="__('Buscar')" />
                 <x-text-input wire:model.live.debounce.500ms="search" id="search" placeholder="......"
                     class="block w-full mt-1 px-3 py-1 " type="text" />
             </div>
-
-            <!-- Filtro de estado -->
-            <div class="w-full sm:w-auto">
-                <x-input-label for="estado" :value="__('Estado')" />
-                <select wire:model.live="estado" id="estado"
-                    class="block w-full mt-1 pl-3 pr-7 py-1 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-teal-400 dark:focus:border-teal-600 focus:outline-none focus:shadow-outline-teal rounded-md shadow-sm form-select">
-                    <option value="">Todos</option>
-                    <option value="1">Activos</option>
-                    <option value="0">Inactivos</option>
-                </select>
-            </div>
-
-            <!-- Cambiar la cantidad de registros por página -->
-            <div class="w-full sm:w-auto">
-                <x-input-label for="perPage" :value="__('Mostrar')" />
-                <select wire:model.live="perPage" id="perPage"
-                    class="block w-full mt-1 pl-3 pr-7 py-1 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-teal-400 dark:focus:border-teal-600 focus:outline-none focus:shadow-outline-teal rounded-md shadow-sm form-select">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="25">25</option>
-                </select>
+            <!-- Filtros -->
+            <div class="w-full sm:w-6/12 flex gap-4">
+                <div class="w-8/12">
+                    <x-input-label for="estado" :value="__('Estado')" />
+                    <select wire:model.live="estado" id="estado"
+                        class="block w-full mt-1 pl-3 pr-7 py-1 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-teal-400 dark:focus:border-teal-600 focus:outline-none focus:shadow-outline-teal rounded-md shadow-sm form-select">
+                        <option value="">Todos</option>
+                        <option value="1">Activos</option>
+                        <option value="0">Inactivos</option>
+                    </select>
+                </div>
+                <div class="w-4/12">
+                    <x-input-label for="perPage" :value="__('Mostrar')" />
+                    <select wire:model.live="perPage" id="perPage"
+                        class="block w-full mt-1 pl-3 pr-7 py-1 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-teal-400 dark:focus:border-teal-600 focus:outline-none focus:shadow-outline-teal rounded-md shadow-sm form-select">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="25">25</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>
@@ -125,8 +126,9 @@
                                             wire:click="modalEliminar({{ $cliente->id }})"
                                             class="py-1 px-2 text-rose-600 rounded-lg focus:outline-none focus:shadow-outline-gray hover:border hover:border-rose-600 border border-transparent"
                                             aria-label="Eliminar">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                class="size-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                                             </svg>

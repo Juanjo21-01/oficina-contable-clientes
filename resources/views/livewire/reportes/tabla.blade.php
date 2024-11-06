@@ -1,6 +1,6 @@
 <div>
     <!-- Indicadores -->
-    <div class="grid grid-cols-3 gap-4 mb-6">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         <div class="flex items-center p-4 bg-white rounded-lg shadow-sm dark:bg-gray-800">
             <div class="p-3 mr-4 text-purple-500 bg-purple-100 rounded-full dark:text-purple-100 dark:bg-purple-500">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -59,23 +59,22 @@
         <form wire:submit.prevent="obtenerReportes" class="mb-6 flex flex-col justify-center items-center gap-5">
             <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {{-- Rango de fechas --}}
-                <div class="flex justify-evenly items-center space-x-4">
-                    <div>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-2">
+                    <div class="w-full sm:w-6/12">
                         <x-input-label for="fechaInicio" :value="__('Fecha Inicial')" />
                         <x-text-input wire:model="fechaInicio" id="fechaInicio" class="block w-full mt-1 px-3 py-1"
                             type="date" name="fechaInicio" required />
                     </div>
-                    <div>
+                    <div class="w-full sm:w-6/12">
                         <x-input-label for="fechaFin" :value="__('Fecha Final')" />
                         <x-text-input wire:model="fechaFin" id="fechaFin" class="block w-full mt-1 px-3 py-1"
                             type="date" name="fechaFin" required />
                     </div>
-
                 </div>
 
                 {{-- Filtros --}}
-                <div class="flex justify-end items-center space-x-4">
-                    <div>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-2">
+                    <div class="w-full sm:w-6/12">
                         <x-input-label for="tipo_tramite_id" :value="__('Tipo de Trámite')" />
                         <select wire:model="tipoTramiteId" id="tipo_tramite_id"
                             class="block w-full mt-1 px-3 py-1 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-teal-400 dark:focus:border-teal-600 focus:outline-none focus:shadow-outline-teal rounded-md shadow-sm form-select"
@@ -86,7 +85,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div>
+                    <div class="w-full sm:w-6/12">
                         <x-input-label for="cliente_id" :value="__('Cliente')" />
                         <select wire:model="clienteId" id="cliente_id"
                             class="block w-full mt-1 px-3 py-1 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-teal-400 dark:focus:border-teal-600 focus:outline-none focus:shadow-outline-teal rounded-md shadow-sm form-select"

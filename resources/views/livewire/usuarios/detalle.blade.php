@@ -3,7 +3,7 @@
         <div class="p-6 space-y-8">
             <!-- Tarjeta de perfil del usuario -->
             <div
-                class="flex items-center p-4 bg-white dark:bg-gray-800 border-2 dark:border-gray-700 rounded-lg shadow-md">
+                class="flex flex-col md:flex-row gap-4 items-center p-4 bg-white dark:bg-gray-800 border-2 dark:border-gray-700 rounded-lg shadow-md">
                 <div class="space-y-2 w-full ">
                     <h2 class="text-2xl font-semibold text-teal-600">{{ $usuario->nombres }} {{ $usuario->apellidos }}
                     </h2>
@@ -48,8 +48,10 @@
 
             <!-- Tabla de Clientes Relacionados -->
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 border-2 dark:border-gray-700">
-                <div class="flex justify-between">
-                    <h3 class="text-xl font-semibold text-teal-600 dark:text-teal-400 p-2">Últimos Clientes Registrados
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-semibold text-teal-600 dark:text-teal-400 p-2">Últimos Clientes
+                        <span class="hidden sm:inline">Registrados</span>
+
                     </h3>
                     {{-- boton para visitar la pagina de clientes --}}
                     <div class="flex justify-end">
@@ -63,45 +65,51 @@
                         </a>
                     </div>
                 </div>
-                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                    <thead>
-                        <tr
-                            class="text-xs font-semibold tracking-widest text-center text-gray-500 uppercase border-b-2  dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                            <th class="px-4 py-3 w-1/12">No.</th>
-                            <th class="px-4 py-3 w-4/12">Nombres</th>
-                            <th class="px-4 py-3 w-2/12">DPI</th>
-                            <th class="px-4 py-3 w-3/12">Correo</th>
-                            <th class="px-4 py-3 w-2/12">NIT</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                        @if ($usuario->clientes->isEmpty())
-                            <tr class="text-gray-700 dark:text-gray-400 text-center">
-                                <td class="px-4 py-3" colspan="5">No hay registros</td>
-                            </tr>
-                        @endif
-                        @foreach ($usuario->clientes->sortByDesc('created_at')->take(5) as $cliente)
-                            <tr class="text-gray-700 dark:text-gray-400 text-center">
-                                <td class="px-4 py-3 w-1/12 font-semibold">{{ $loop->iteration }}</td>
-                                <td class="px-4 py-3 w-4/12">
-                                    <p class="font-semibold">{{ $cliente->nombres }} {{ $cliente->apellidos }}</p>
-                                    <p class="text-xs text-gray-600 dark:text-gray-400">
-                                        {{ $cliente->direccion }}
-                                    </p>
-                                </td>
-                                <td class="px-4 py-3 w-2/12">{{ $cliente->dpi }}</td>
-                                <td class="px-4 py-3 w-3/12">{{ $cliente->email }}</td>
-                                <td class="px-4 py-3 w-2/12">{{ $cliente->nit }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <div class="w-full overflow-hidden rounded-lg shadow-lg border mx-auto dark:border-gray-700 mb-4">
+                    <div class="w-full overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead>
+                                <tr
+                                    class="text-xs font-semibold tracking-widest text-center text-gray-500 uppercase border-b-2  dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                    <th class="px-4 py-3 w-1/12">No.</th>
+                                    <th class="px-4 py-3 w-4/12">Nombres</th>
+                                    <th class="px-4 py-3 w-2/12">DPI</th>
+                                    <th class="px-4 py-3 w-3/12">Correo</th>
+                                    <th class="px-4 py-3 w-2/12">NIT</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                @if ($usuario->clientes->isEmpty())
+                                    <tr class="text-gray-700 dark:text-gray-400 text-center">
+                                        <td class="px-4 py-3" colspan="5">No hay registros</td>
+                                    </tr>
+                                @endif
+                                @foreach ($usuario->clientes->sortByDesc('created_at')->take(5) as $cliente)
+                                    <tr class="text-gray-700 dark:text-gray-400 text-center">
+                                        <td class="px-4 py-3 w-1/12 font-semibold">{{ $loop->iteration }}</td>
+                                        <td class="px-4 py-3 w-4/12">
+                                            <p class="font-semibold">{{ $cliente->nombres }} {{ $cliente->apellidos }}
+                                            </p>
+                                            <p class="text-xs text-gray-600 dark:text-gray-400">
+                                                {{ $cliente->direccion }}
+                                            </p>
+                                        </td>
+                                        <td class="px-4 py-3 w-2/12">{{ $cliente->dpi }}</td>
+                                        <td class="px-4 py-3 w-3/12">{{ $cliente->email }}</td>
+                                        <td class="px-4 py-3 w-2/12">{{ $cliente->nit }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <!-- Tabla de Trámites Relacionados -->
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 border-2 dark:border-gray-700">
-                <div class="flex justify-between">
-                    <h3 class="text-xl font-semibold text-teal-600 dark:text-teal-400 p-2">Últimos Trámites Realizados
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-semibold text-teal-600 dark:text-teal-400 p-2">Últimos Trámites
+                        <span class="hidden sm:inline">Realizados</span>
                     </h3>
                     {{-- boton para visitar la pagina de tramites --}}
                     <div class="flex justify-end">
@@ -115,36 +123,40 @@
                         </a>
                     </div>
                 </div>
-                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                    <thead>
-                        <tr
-                            class="text-xs font-semibold tracking-widest text-center text-gray-500 uppercase border-b-2  dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                            <th class="px-4 py-3 w-1/12">No.</th>
-                            <th class="px-4 py-3 w-4/12">Cliente</th>
-                            <th class="px-4 py-3 w-3/12">Tipo de trámite</th>
-                            <th class="px-4 py-3 w-2/12">Precio</th>
-                            <th class="px-4 py-3 w-2/12">Fecha</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                        @if ($usuario->tramites->isEmpty())
-                            <tr class="text-gray-700 dark:text-gray-400 text-center">
-                                <td class="px-4 py-3" colspan="5">No hay registros</td>
-                            </tr>
-                        @endif
-                        @foreach ($usuario->tramites->sortByDesc('created_at')->take(5) as $tramite)
-                            <tr class="text-gray-700 dark:text-gray-400 text-center">
-                                <td class="px-4 py-3 font-semibold w-1/12">{{ $loop->iteration }}</td>
-                                <td class="px-4 py-3 w-4/12">{{ $tramite->cliente->nombres }}
-                                    {{ $tramite->cliente->apellidos }} </td>
-                                <td class="px-4 py-3 w-3/12">{{ $tramite->tipoTramite->nombre }}</td>
-                                <td class="px-4 py-3 w-2/12">Q. {{ $tramite->precio }}</td>
-                                <td class="px-4 py-3 font-semibold w-2/12">
-                                    {{ date('d/m/Y', strtotime($tramite->fecha)) }}
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <div class="w-full overflow-hidden rounded-lg shadow-lg border mx-auto dark:border-gray-700 mb-4">
+                    <div class="w-full overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead>
+                                <tr
+                                    class="text-xs font-semibold tracking-widest text-center text-gray-500 uppercase border-b-2  dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                    <th class="px-4 py-3 w-1/12">No.</th>
+                                    <th class="px-4 py-3 w-4/12">Cliente</th>
+                                    <th class="px-4 py-3 w-3/12">Tipo de trámite</th>
+                                    <th class="px-4 py-3 w-2/12">Precio</th>
+                                    <th class="px-4 py-3 w-2/12">Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                @if ($usuario->tramites->isEmpty())
+                                    <tr class="text-gray-700 dark:text-gray-400 text-center">
+                                        <td class="px-4 py-3" colspan="5">No hay registros</td>
+                                    </tr>
+                                @endif
+                                @foreach ($usuario->tramites->sortByDesc('created_at')->take(5) as $tramite)
+                                    <tr class="text-gray-700 dark:text-gray-400 text-center">
+                                        <td class="px-4 py-3 font-semibold w-1/12">{{ $loop->iteration }}</td>
+                                        <td class="px-4 py-3 w-4/12">{{ $tramite->cliente->nombres }}
+                                            {{ $tramite->cliente->apellidos }} </td>
+                                        <td class="px-4 py-3 w-3/12">{{ $tramite->tipoTramite->nombre }}</td>
+                                        <td class="px-4 py-3 w-2/12">Q. {{ $tramite->precio }}</td>
+                                        <td class="px-4 py-3 font-semibold w-2/12">
+                                            {{ date('d/m/Y', strtotime($tramite->fecha)) }}
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     @endif

@@ -82,7 +82,7 @@
     </script>
 </head>
 
-<body>
+<body class="overflow-hidden">
     <div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         <!-- Navegación -->
         <livewire:layout.navigation />
@@ -94,7 +94,7 @@
             class="fixed inset-0 z-10 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center"></div>
         <livewire:layout.navigationMobile />
 
-        <div class="flex flex-col flex-1 w-full">
+        <div class="flex flex-col flex-1 w-full overflow-hidden">
             <!-- Encabezado -->
             <livewire:layout.header />
 

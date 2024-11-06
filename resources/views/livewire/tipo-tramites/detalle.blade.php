@@ -35,8 +35,10 @@
 
         <!-- Tabla de Tramites Realizados -->
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 border-2 dark:border-gray-700">
-            <div class="flex justify-between">
-                <h3 class="text-xl font-semibold text-teal-600 dark:text-teal-400 p-2">Últimos Tramites Realizados</h3>
+            <div class="flex justify-between items-center">
+                <h3 class="text-xl font-semibold text-teal-600 dark:text-teal-400 p-2">Últimos Tramites
+                    <span class="hidden sm:inline">Realizados</span>
+                </h3>
                 <!-- botón para visitar la página de Trámites -->
                 <div class="flex justify-end">
                     <a href="{{ route('tramites.index') }}" wire:navigate
@@ -49,35 +51,40 @@
                     </a>
                 </div>
             </div>
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                <thead>
-                    <tr
-                        class="text-xs font-semibold tracking-widest text-center text-gray-500 uppercase border-b-2 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 dark:text-gray-400">
-                        <th class="px-4 py-3 w-1/12">No.</th>
-                        <th class="px-4 py-3 w-4/12">Cliente</th>
-                        <th class="px-4 py-3 w-2/12">Gastos</th>
-                        <th class="px-4 py-3 w-3/12">Tipo de trámite</th>
-                        <th class="px-4 py-3 w-2/12">Fecha</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                    @if ($tipoTramite->tramites->isEmpty())
-                        <tr class="text-gray-700 dark:text-gray-400 text-center">
-                            <td class="px-4 py-3" colspan="5">No hay registros</td>
-                        </tr>
-                    @endif
-                    @foreach ($tipoTramite->tramites->sortByDesc('created_at')->take(5) as $tramite)
-                        <tr class="text-gray-700 dark:text-gray-400 text-center">
-                            <td class="px-4 py-3 font-semibold w-1/12">{{ $loop->iteration }}</td>
-                            <td class="px-4 py-3 w-4/12">{{ $tramite->cliente->nombres }}
-                                {{ $tramite->cliente->apellidos }}</td>
-                            <td class="px-4 py-3 w-2/12">Q. {{ $tramite->gastos }}</td>
-                            <td class="px-4 py-3 w-3/12">{{ $tramite->tipoTramite->nombre }}</td>
-                            <td class="px-4 py-3 font-semibold w-2/12">{{ date('d/m/Y', strtotime($tramite->fecha)) }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <div class="w-full overflow-hidden rounded-lg shadow-lg border mx-auto dark:border-gray-700 mb-4">
+                <div class="w-full overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead>
+                            <tr
+                                class="text-xs font-semibold tracking-widest text-center text-gray-500 uppercase border-b-2 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 dark:text-gray-400">
+                                <th class="px-4 py-3 w-1/12">No.</th>
+                                <th class="px-4 py-3 w-4/12">Cliente</th>
+                                <th class="px-4 py-3 w-2/12">Gastos</th>
+                                <th class="px-4 py-3 w-3/12">Tipo de trámite</th>
+                                <th class="px-4 py-3 w-2/12">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                            @if ($tipoTramite->tramites->isEmpty())
+                                <tr class="text-gray-700 dark:text-gray-400 text-center">
+                                    <td class="px-4 py-3" colspan="5">No hay registros</td>
+                                </tr>
+                            @endif
+                            @foreach ($tipoTramite->tramites->sortByDesc('created_at')->take(5) as $tramite)
+                                <tr class="text-gray-700 dark:text-gray-400 text-center">
+                                    <td class="px-4 py-3 font-semibold w-1/12">{{ $loop->iteration }}</td>
+                                    <td class="px-4 py-3 w-4/12">{{ $tramite->cliente->nombres }}
+                                        {{ $tramite->cliente->apellidos }}</td>
+                                    <td class="px-4 py-3 w-2/12">Q. {{ $tramite->gastos }}</td>
+                                    <td class="px-4 py-3 w-3/12">{{ $tramite->tipoTramite->nombre }}</td>
+                                    <td class="px-4 py-3 font-semibold w-2/12">
+                                        {{ date('d/m/Y', strtotime($tramite->fecha)) }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

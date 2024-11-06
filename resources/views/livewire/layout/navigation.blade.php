@@ -15,7 +15,7 @@ new class extends Component {
     }
 }; ?>
 
-<aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
+<aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 lg:block flex-shrink-0">
     <!-- Desktop sidebar -->
     <div class="py-4 text-zinc-500 dark:text-zinc-400">
         <!-- Logo -->

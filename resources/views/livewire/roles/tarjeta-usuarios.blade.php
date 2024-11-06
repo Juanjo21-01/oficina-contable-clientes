@@ -1,6 +1,6 @@
-<div class="py-5 w-3/4 mx-auto">
+<div class="py-5 w-full lg:w-3/4 mx-auto overflow-hidden">
     @if ($verUsuarios)
-        <div class="rounded-lg p-2">
+        <div class="overflow-x-auto rounded-lg p-2">
             {{-- cerrar ventana --}}
             <div class="flex justify-end px-4">
                 <button wire:click="cerrarUsuarios" title="Cerrar"

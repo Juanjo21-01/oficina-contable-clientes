@@ -1,7 +1,8 @@
 <div>
     <div class="p-6 space-y-5">
         <!-- Tarjeta de perfil del tramite -->
-        <div class="flex items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md border-2 dark:border-gray-700">
+        <div
+            class="flex flex-col md:flex-row gap-2 md:gap-4 items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md border-2 dark:border-gray-700">
             <div class="space-y-2 w-full">
                 <h2 class="text-2xl font-semibold text-teal-600 dark:text-teal-400">{{ $tramite->cliente->nombres }}
                     {{ $tramite->cliente->apellidos }}
@@ -25,7 +26,7 @@
                     </p>
                 </div>
             </div>
-            <div class="flex flex-col sm:flex-row justify-end gap-1">
+            <div class="flex justify-end gap-1">
                 <button wire:click="cambiarEstado({{ $tramite->id }})"
                     class="px-4 py-2 font-semibold leading-tight rounded-full {{ !$tramite->estado ? 'bg-teal-100 dark:bg-teal-700 text-teal-700 dark:text-teal-100' : 'bg-rose-100 dark:bg-rose-700 text-rose-700 dark:text-rose-100' }}">
                     {{ !$tramite->estado ? 'Activar' : 'Desactivar' }}
@@ -54,13 +55,15 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="m9 13.5 3 3m0 0 3-3m-3 3v-6m1.06-4.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
                 </svg>
-                <span class="hidden sm:inline">Descargar Recibo</span>
+                <span>Descargar</span>
+                <span class="hidden sm:inline">Recibo</span>
             </a>
         </div>
 
         <hr class="border-t dark:border-gray-700">
 
-        <div class="w-6/12 mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 border-2 dark:border-gray-700">
+        <div
+            class="w-full md:w-10/12 lg:w-8/12 xl:w-6/12 mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 border-2 dark:border-gray-700">
             <!-- Encabezado con Logo e Información de la Empresa -->
             <div class="text-center border-b pb-4 mb-4 border-gray-200 dark:border-gray-700">
                 <!-- Logo de la Empresa -->

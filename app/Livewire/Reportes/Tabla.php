@@ -45,7 +45,7 @@ class Tabla extends Component
 
     public function render()
     {
-        $clientes = Cliente::all();
+        $clientes = Cliente::where('estado', 1)->get();
         $tipoTramites = TipoTramite::all();
         return view('livewire.reportes.tabla', [
             'clientes' => $clientes,
@@ -59,8 +59,9 @@ class Tabla extends Component
         $inicioSemana = Carbon::now()->startOfWeek();
         $finSemana = Carbon::now()->endOfWeek();
 
-        // Consulta para obtener los trámites de la semana
-        $query = Tramite::whereBetween('fecha', [$inicioSemana, $finSemana]);
+        // Consulta para obtener los trámites de la semana, que estén activos
+        $query = Tramite::where('estado', 1)
+            ->whereBetween('fecha', [$inicioSemana, $finSemana]);
 
         return $this->aplicarFiltros($query);
     }
@@ -70,8 +71,9 @@ class Tabla extends Component
         $inicioMes = Carbon::now()->startOfMonth();
         $finMes = Carbon::now()->endOfMonth();
 
-        // Consulta para obtener los trámites del mes
-        $query =  Tramite::whereBetween('fecha', [$inicioMes, $finMes]);
+        // Consulta para obtener los trámites del mes, que estén activos
+        $query = Tramite::where('estado', 1)
+            ->whereBetween('fecha', [$inicioMes, $finMes]);
 
         return $this->aplicarFiltros($query);
     }
@@ -83,8 +85,9 @@ class Tabla extends Component
             $inicio = Carbon::parse($this->fechaInicio)->startOfDay();
             $fin = Carbon::parse($this->fechaFin)->endOfDay();
 
-            // Consulta para obtener los trámites del rango de fechas
-            $query = Tramite::whereBetween('fecha', [$inicio, $fin]);
+            // Consulta para obtener los trámites del rango de fechas, que estén activos
+            $query = Tramite::where('estado', 1)
+                ->whereBetween('fecha', [$inicio, $fin]);
 
             return $this->aplicarFiltros($query);
         }
