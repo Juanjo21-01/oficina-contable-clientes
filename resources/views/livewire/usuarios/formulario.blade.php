@@ -63,7 +63,7 @@
                 <select wire:model="roleId" id="role_id"
                     class="block w-full mt-1 px-3 py-1 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-teal-400 dark:focus:border-teal-600 focus:outline-none focus:shadow-outline-teal rounded-md shadow-sm form-select {{ $errors->has('roleId') ? 'border-red-600 focus:border-red-400  dark:border-red-400' : '' }}"
                     name="roleId" wire:click="clearError('roleId')">
-                    <option value="" selected disabled>Seleccione un rol</option>
+                    <option value="">Seleccione un rol</option>
                     @foreach ($roles as $rol)
                         <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
                     @endforeach
