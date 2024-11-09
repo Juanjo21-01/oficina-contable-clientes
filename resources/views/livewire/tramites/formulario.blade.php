@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit.prevent="guardar" class="mb-6">
+    <form wire:submit.prevent="guardar" class="mb-16">
         @if ($errorMessage)
             <div class="bg-red-500 text-white p-2 rounded mb-4 text-sm">{{ $errorMessage }}</div>
         @endif
