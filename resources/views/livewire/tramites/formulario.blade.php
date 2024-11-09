@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit.prevent="guardar">
+    <form wire:submit.prevent="guardar" class="mb-6">
         @if ($errorMessage)
             <div class="bg-red-500 text-white p-2 rounded mb-4 text-sm">{{ $errorMessage }}</div>
         @endif
@@ -14,7 +14,8 @@
                     {{-- Buscar cliente --}}
                     <div>
                         <x-input-label for="buscarCliente" :value="__('Buscar Cliente')" />
-                        <x-text-input wire:model.live.debounce.500ms="buscarCliente" id="buscarCliente" placeholder="Buscar por nombre o apellido"
+                        <x-text-input wire:model.live.debounce.500ms="buscarCliente" id="buscarCliente"
+                            placeholder="Buscar por nombre o apellido"
                             class="block w-full mt-1 px-3 py-1 {{ $errors->has('buscarCliente') ? 'border-red-600 focus:border-red-400 dark:border-red-400' : '' }}"
                             type="text" name="buscarCliente" wire:keydown="clearError('buscarCliente')" />
                         @error('buscarCliente')
@@ -54,7 +55,8 @@
                     {{-- Buscar tipo de tramite --}}
                     <div>
                         <x-input-label for="buscarTipoTramite" :value="__('Buscar Tipo')" />
-                        <x-text-input wire:model.live.debounce.500ms="buscarTipoTramite" id="buscarTipoTramite" placeholder="Buscar por nombre"
+                        <x-text-input wire:model.live.debounce.500ms="buscarTipoTramite" id="buscarTipoTramite"
+                            placeholder="Buscar por nombre"
                             class="block w-full mt-1 px-3 py-1 {{ $errors->has('buscarTipoTramite') ? 'border-red-600 focus:border-red-400 dark:border-red-400' : '' }}"
                             type="text" name="buscarTipoTramite" wire:keydown="clearError('buscarTipoTramite')" />
                         @error('buscarTipoTramite')

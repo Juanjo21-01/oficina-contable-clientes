@@ -1,5 +1,5 @@
 <div>
-    <form>
+    <form class="mb-6">
         @if ($errorMessage)
             <div class="bg-red-500 text-white p-2 rounded mb-4 text-sm">{{ $errorMessage }}</div>
         @endif
