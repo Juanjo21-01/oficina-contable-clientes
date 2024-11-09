@@ -4,8 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\DashboardController;
 
-const AUTH = 'auth';
-
 // RUTA PRINCIPAL
 Route::get('dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
@@ -16,7 +14,7 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 // RUTAS PROTEGIDAS
-Route::middleware(AUTH)->group(function () {
+Route::middleware('auth')->group(function () {
     // Roles
     Route::view('roles', 'roles')->name('roles');
 
