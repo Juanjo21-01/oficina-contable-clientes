@@ -28,7 +28,7 @@ class PDFController extends Controller
         $pdf = PDF::loadView('pdf.recibo', compact('tramite'));
 
         // Descargar PDF
-        return $pdf->download('Trámite No. ' . $tramite->id . ' - '.$tramite->cliente->nombres.'.pdf');
+        return $pdf->stream('Trámite No. ' . $tramite->id . ' - '.$tramite->cliente->nombres.'.pdf');
     }
 
     // PDF de reporte de tramites
