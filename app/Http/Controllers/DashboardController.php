@@ -26,7 +26,18 @@ class DashboardController extends Controller
             ->take(5)
             ->get(['id', 'nombres', 'apellidos', 'email', 'telefono', 'estado']);
 
+        // Datos para la gráfica
+        $chartData = [
+            'labels' => ['Clientes', 'Trámites'],
+            'datasets' => [
+                [
+                    'label' => 'Cantidad',
+                    'backgroundColor' => ['#4FD1C5', '#F97316'],
+                    'data' => [$totalClientes, $totalTramites],
+                ],
+            ],
+        ];
 
-        return view('dashboard', compact('totalTramites', 'totalClientes', 'gastoTotal', 'ultimosTramites', 'ultimosClientes'));
+        return view('dashboard', compact('totalTramites', 'totalClientes', 'gastoTotal', 'ultimosTramites', 'ultimosClientes', 'chartData'));
     }
 }

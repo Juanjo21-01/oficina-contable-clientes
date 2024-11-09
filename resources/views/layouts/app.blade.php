@@ -14,6 +14,7 @@
     <!-- Fonts -->
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script>
         function data() {
@@ -100,7 +101,7 @@
 
             <!-- Contenido -->
             <main class="h-full overflow-y-auto">
-                <div class="container px-6 mx-auto">
+                <div class="container px-6 mx-auto mb-5">
                     {{ $slot }}
                 </div>
             </main>

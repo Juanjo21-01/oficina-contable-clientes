@@ -15,18 +15,6 @@
 
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg border-2 dark:border-gray-700">
                 <div class="max-w-7xl mx-auto space-y-4">
-                    <!-- Espacio para estadísticas -->
-                    <h3 class="text-2xl font-semibold text-teal-600 dark:text-teal-400">Estadísticas</h3>
-                    <p class="text-gray-600 mb-4 dark:text-gray-400">Gráfica de la cantidad de clientes registrados
-                        y trámites realizados</p>
-                    <div class="w-full h-64 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
-                        <span class="text-gray-500 dark:text-gray-300">Gráfica aquí</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg border-2 dark:border-gray-700">
-                <div class="max-w-7xl mx-auto space-y-4">
                     <!-- Tabla de Clientes Relacionados -->
                     <div class="flex justify-between">
                         <h3 class="text-xl font-semibold text-teal-600 dark:text-teal-400 p-2">Últimos Clientes

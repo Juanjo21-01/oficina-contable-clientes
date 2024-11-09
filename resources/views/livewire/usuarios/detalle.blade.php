@@ -42,7 +42,7 @@
                 <p class="text-gray-600 mb-4 dark:text-gray-400">Gráfica de la cantidad de clientes registrados y
                     trámites realizados</p>
                 <div class="w-full h-64 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
-                    <span class="text-gray-500 dark:text-gray-300">Gráfica aquí</span>
+                    <canvas id="myChart" class="w-full h-full"></canvas>
                 </div>
             </div>
 
@@ -160,4 +160,26 @@
             </div>
         </div>
     @endif
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const chartData = @json($chartData);
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </div>

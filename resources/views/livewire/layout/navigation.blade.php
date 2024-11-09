@@ -318,7 +318,7 @@ new class extends Component {
                 </template>
             </li>
             {{-- Bitacora --}}
-            @if (Auth::user()->role->nombre == 'Administrador')
+            {{-- @if (Auth::user()->role->nombre == 'Administrador')
                 <li class="relative px-6 py-3">
                     @if (request()->routeIs('dashboard'))
                         <span class="absolute inset-y-0 left-0 w-1 bg-teal-600 rounded-tr-lg rounded-br-lg"
@@ -336,7 +336,7 @@ new class extends Component {
                         <span class="ml-4">Bitácora</span>
                     </a>
                 </li>
-            @endif
+            @endif --}}
         </ul>
 
         {{-- Cerrar Sesión --}}

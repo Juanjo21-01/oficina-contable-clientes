@@ -29,8 +29,23 @@ class Detalle extends Component
     public function render()
     {
         $this->tipoTramite = TipoTramite::find($this->tipoTramiteId);
+
+        // Datos para la gráfica
+        $totalTramites = $this->tipoTramite->tramites->count();
+        $chartData = [
+            'labels' => ['Clientes'],
+            'datasets' => [
+                [
+                    'label' => 'Cantidad',
+                    'backgroundColor' => ['#4FD1C5', '#F97316'],
+                    'data' => [$totalTramites, 0],
+                ],
+            ],
+        ];
+
         return view('livewire.tipo-tramites.detalle', [
-            'tipoTramite' => $this->tipoTramite
+            'tipoTramite' => $this->tipoTramite,
+            'chartData' => $chartData,
         ]);
     }
 }

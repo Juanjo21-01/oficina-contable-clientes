@@ -29,7 +29,7 @@ new class extends Component {
 
         <!-- Search input -->
         <div class="hidden md:flex justify-center flex-1 lg:mr-32">
-            <div class="relative w-full max-w-xl mr-6 focus-within:text-teal-500">
+            {{-- <div class="relative w-full max-w-xl mr-6 focus-within:text-teal-500">
                 <div class="absolute inset-y-0 flex items-center pl-2">
                     <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd"
@@ -40,7 +40,7 @@ new class extends Component {
                 <input
                     class="w-full pl-8 pr-2 text-sm text-zinc-700 placeholder-zinc-600 bg-gray-100 border-0 rounded-md dark:placeholder-zinc-500 dark:focus:shadow-outline-zinc dark:focus:placeholder-zinc-600 dark:bg-gray-700 dark:text-zinc-200 focus:placeholder-zinc-500  focus:border-teal-300 focus:outline-none focus:shadow-outline-teal form-input"
                     type="text" placeholder="Buscar trámites" aria-label="Search" />
-            </div>
+            </div> --}}
         </div>
 
         <!-- Enlaces -->

@@ -69,8 +69,24 @@ class Detalle extends Component
     public function render()
     {
         $this->usuario = User::find($this->usuarioId);
+        
+        // Datos para la gráfica
+        $totalTramites = User::find($this->usuarioId)->tramites()->where('estado', 1)->count();
+        $totalClientes = User::find($this->usuarioId)->clientes()->where('estado', 1)->count();
+        $chartData = [
+            'labels' => ['Clientes', 'Trámites'],
+            'datasets' => [
+                [
+                    'label' => 'Cantidad',
+                    'backgroundColor' => ['#4FD1C5', '#F97316'],
+                    'data' => [$totalClientes, $totalTramites],
+                ],
+            ],
+        ];
+
         return view('livewire.usuarios.detalle', [
-            'usuario' => $this->usuario
+            'usuario' => $this->usuario,
+            'chartData' => $chartData,
         ]);
     }
 }

@@ -144,8 +144,23 @@ class Detalle extends Component
     public function render()
     {
         $this->cliente = Cliente::find($this->clienteId);
+
+        // Datos para la gráfica
+        $totalTramites = $this->cliente->tramites->count();
+        $chartData = [
+            'labels' => ['Clientes'],
+            'datasets' => [
+                [
+                    'label' => 'Cantidad',
+                    'backgroundColor' => ['#4FD1C5', '#F97316'],
+                    'data' => [$totalTramites, 0],
+                ],
+            ],
+        ];
+
         return view('livewire.clientes.detalle', [
-            'cliente' => $this->cliente
+            'cliente' => $this->cliente,
+            'chartData' => $chartData,
         ]);
     }
 }
