@@ -22,10 +22,10 @@
                         {{-- boton para visitar la pagina de clientes --}}
                         <div class="flex justify-end">
                             <a href="{{ route('clientes.index') }}" wire:navigate
-                                class="flex items-center text-gray-600 dark:text-gray-400 hover:underline m-3">
+                                class="flex items-center text-teal-600 dark:text-teal-400 hover:underline">
                                 <span>Ver todos los clientes</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </a>
@@ -82,10 +82,10 @@
                         {{-- boton para visitar la pagina de tramites --}}
                         <div class="flex justify-end">
                             <a href="{{ route('tramites.index') }}" wire:navigate
-                                class="flex items-center text-gray-600 dark:text-gray-400 hover:underline m-3">
+                                class="flex items-center text-teal-600 dark:text-teal-400 hover:underline">
                                 <span>Ver todos los trámites</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </a>

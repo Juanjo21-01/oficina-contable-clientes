@@ -47,6 +47,10 @@ Route::middleware('auth')->group(function () {
     // Reportes
     Route::view('reportes', 'reportes.index')->name('reportes.index');
 
+    // Bitácora
+    Route::view('bitacora', 'bitacora.index')->name('bitacora');
+    Route::view('bitacora/{id}', 'bitacora.mostrar')->name('bitacora.mostrar');
+
 });
 
 require __DIR__.'/auth.php';

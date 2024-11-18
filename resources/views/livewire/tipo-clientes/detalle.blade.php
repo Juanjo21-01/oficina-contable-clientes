@@ -1,14 +1,14 @@
 <div>
     <div class="p-6 space-y-8">
-        <!-- Tarjeta de perfil del tipoCliente -->
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md border-2 dark:border-gray-700">
-            <div class="space-y-2 w-full">
-                <h2 class="text-2xl font-semibold text-teal-600 dark:text-teal-400">{{ $tipoCliente->nombre }}</h2>
-                <p class="text-gray-700 dark:text-gray-300"><strong>Fecha de Creación:</strong>
-                    {{ $tipoCliente->created_at->format('d/m/Y') }}</p>
-                <p class="text-gray-700 dark:text-gray-300"><strong>Clientes Asociados:</strong>
-                    {{ $tipoCliente->clientes->count() }}
-                    Clientes
+        <!-- Tarjeta de perfil del tipo de cliente -->
+        <div class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg border dark:border-gray-700">
+            <h2 class="text-center sm:text-start text-2xl font-bold text-teal-600 dark:text-teal-400 mb-2 border-b pb-4 dark:border-gray-600">{{ $tipoCliente->nombre }}</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <p class="text-gray-700 dark:text-gray-300">
+                    <strong>Fecha de Creación:</strong> {{ $tipoCliente->created_at->format('d/m/Y') }}
+                </p>
+                <p class="text-gray-700 dark:text-gray-300">
+                    <strong>Clientes Asociados:</strong> {{ $tipoCliente->clientes->count() }} {{ $tipoCliente->clientes->count() == 1 ? 'cliente' : 'clientes' }}
                 </p>
             </div>
         </div>
@@ -31,10 +31,10 @@
                 {{-- Botón para visitar la página de clientes --}}
                 <div class="flex justify-end">
                     <a href="{{ route('clientes.index') }}" wire:navigate
-                        class="flex items-center text-gray-600 dark:text-gray-400 hover:underline m-3">
+                        class="flex items-center text-teal-600 dark:text-teal-400 hover:underline">
                         <span>Ver todos los clientes</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="size-6">
+                            stroke="currentColor" class="w-5 h-5 ml-2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
                     </a>

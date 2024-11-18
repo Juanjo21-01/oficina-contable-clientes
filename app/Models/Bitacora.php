@@ -12,6 +12,7 @@ class Bitacora extends Model
 
     // Campos que se pueden llenar
     protected $fillable = [
+        'tipo',
         'descripcion',
         'user_id',
     ];

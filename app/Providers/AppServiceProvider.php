@@ -4,6 +4,14 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
+use App\Models\User;
+use App\Models\Cliente;
+use App\Models\TipoTramite;
+use App\Models\Tramite;
+use App\Observers\UserObserver;
+use App\Observers\ClienteObserver;
+use App\Observers\TipoTramiteObserver;
+use App\Observers\TramiteObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,8 +28,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Force HTTPS in production
         if (config('app.env') === 'production') {
-        URL::forceScheme('https');
-    }
+            URL::forceScheme('https');
+        }
+
+        // Observers
+        User::observe(UserObserver::class);
+        Cliente::observe(ClienteObserver::class);
+        TipoTramite::observe(TipoTramiteObserver::class);
+        Tramite::observe(TramiteObserver::class);
     }
 }

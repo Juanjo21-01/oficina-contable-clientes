@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('bitacoras', function (Blueprint $table) {
             $table->id();
+            $table->enum('tipo', ['creacion', 'eliminacion', 'reporte']);
             $table->text('descripcion');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();

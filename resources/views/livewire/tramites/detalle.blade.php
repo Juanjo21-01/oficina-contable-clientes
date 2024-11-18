@@ -1,42 +1,68 @@
 <div>
     <div class="p-6 space-y-5">
         <!-- Tarjeta de perfil del tramite -->
-        <div
-            class="flex flex-col md:flex-row gap-2 md:gap-4 items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md border-2 dark:border-gray-700">
-            <div class="space-y-2 w-full">
-                <h2 class="text-2xl font-semibold text-teal-600 dark:text-teal-400">{{ $tramite->cliente->nombres }}
-                    {{ $tramite->cliente->apellidos }}
+        <div class="flex flex-col gap-4 p-6 bg-white dark:bg-gray-800 border rounded-lg shadow-md dark:border-gray-700">
+            <!-- Encabezado -->
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between text-center border-b pb-4 dark:border-gray-600">
+                <h2 class="text-xl font-bold text-teal-600 dark:text-teal-400 mb-2 sm:mb-0">
+                    {{ $tramite->cliente->nombres }} {{ $tramite->cliente->apellidos }}
                 </h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 p-3">
-                    <p class="text-gray-700 dark:text-gray-300"><strong>Fecha del trámite:</strong>
+                <span class="text-sm sm:text-base text-gray-500 dark:text-gray-400 font-semibold">
+                    {{ $tramite->tipoTramite->nombre }}
+                </span>
+            </div>
+
+            <!-- Detalles del trámite -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div>
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Fecha del Trámite</p>
+                    <p class="text-base font-semibold text-gray-800 dark:text-gray-200">
                         {{ date('d/m/Y', strtotime($tramite->fecha)) }}
                     </p>
-                    <p class="text-gray-700 dark:text-gray-300"><strong>Gastos:</strong> Q.{{ $tramite->gastos }}</p>
-                    <p class="text-gray-700 dark:text-gray-300"><strong>Precio:</strong> Q.{{ $tramite->precio }}</p>
-                    <p class="text-gray-700 dark:text-gray-300"><strong>Tipo de trámite:</strong>
-                        {{ $tramite->tipoTramite->nombre }}</p>
-                    <p class="text-gray-700 dark:text-gray-300"><strong>Observaciones:</strong>
-                        {{ $tramite->observaciones }}</p>
-                    <p class="text-gray-700 dark:text-gray-300">
-                        <strong>Estado:</strong>
-                        <span
-                            class="{{ $tramite->estado ? 'text-teal-500 dark:text-teal-400' : 'text-rose-500 dark:text-rose-400' }}">
-                            {{ $tramite->estado ? 'Activo' : 'Inactivo' }}
-                        </span>
+                </div>
+
+                <div>
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Gastos</p>
+                    <p class="text-base font-semibold text-gray-800 dark:text-gray-200">
+                        Q.{{ $tramite->gastos }}
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Precio</p>
+                    <p class="text-base font-semibold text-gray-800 dark:text-gray-200">
+                        Q.{{ $tramite->precio }}
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Estado</p>
+                    <p
+                        class="text-base font-semibold {{ $tramite->estado ? 'text-teal-500 dark:text-teal-400' : 'text-rose-500 dark:text-rose-400' }}">
+                        {{ $tramite->estado ? 'Activo' : 'Inactivo' }}
+                    </p>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Observaciones</p>
+                    <p class="text-base text-gray-800 dark:text-gray-200">
+                        {{ $tramite->observaciones ?? 'Sin observaciones' }}
                     </p>
                 </div>
             </div>
-            <div class="flex justify-end gap-1">
+
+            <!-- Botones de acción -->
+            <div class="flex justify-end gap-2 pt-4 border-t dark:border-gray-600">
                 <button wire:click="cambiarEstado({{ $tramite->id }})"
-                    class="px-4 py-2 font-semibold leading-tight rounded-full {{ !$tramite->estado ? 'bg-teal-100 dark:bg-teal-700 text-teal-700 dark:text-teal-100' : 'bg-rose-100 dark:bg-rose-700 text-rose-700 dark:text-rose-100' }}">
+                    class="px-4 py-2 text-sm font-medium leading-tight rounded-full {{ !$tramite->estado ? 'bg-teal-100 dark:bg-teal-700 text-teal-700 dark:text-teal-100' : 'bg-rose-100 dark:bg-rose-700 text-rose-700 dark:text-rose-100' }}">
                     {{ !$tramite->estado ? 'Activar' : 'Desactivar' }}
                 </button>
+
                 <button title="Editar el trámite" wire:click="editar({{ $tramite->id }})"
-                    class="px-4 py-2 text-orange-600 dark:text-orange-400 rounded-lg focus:outline-none hover:border hover:border-orange-600 border border-transparent flex items-center gap-1"
-                    aria-label="Editar">
+                    class="px-4 py-2 text-sm font-medium text-orange-600 rounded-lg border border-transparent hover:border-orange-600 flex items-center gap-2">
                     <span class="hidden sm:inline">Editar</span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6">
+                        stroke="currentColor" class="w-5 h-5">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
                     </svg>
@@ -46,18 +72,17 @@
 
         <hr class="border-t dark:border-gray-700">
 
-        <div class="max-w-xs mx-auto flex items-center justify-center border-b-2 dark:border-gray-700">
-            <!-- Recibo del tramite -->
-            <a title="Descargar el trámite" href="{{ route('tramites.pdf', $tramite->id) }}" target="_blank"
+        <!-- Recibo del tramite -->
+        <div class="flex justify-center mt-4">
+            <a title="Descargar recibo" href="{{ route('tramites.pdf', $tramite->id) }}" target="_blank"
                 rel="noopener noreferrer"
-                class="px-4 py-2 text-orange-600 dark:text-orange-400 rounded-lg focus:outline-none hover:border hover:border-orange-600 border border-transparent flex items-center gap-1 ">
+                class="px-4 py-2 text-sm font-medium text-orange-600 rounded-lg border border-transparent hover:border-orange-600 flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-6">
+                    stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="m9 13.5 3 3m0 0 3-3m-3 3v-6m1.06-4.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
                 </svg>
-                <span>Descargar</span>
-                <span class="hidden sm:inline">Recibo</span>
+                <span>Descargar Recibo</span>
             </a>
         </div>
 

@@ -1,7 +1,7 @@
 <div>
     <div class="p-6 space-y-8">
-        <!-- Tarjeta de perfil del tipoTramite -->
-        <div class="flex items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md border-2 dark:border-gray-700">
+        <!-- Tarjeta de perfil del tipo de tramite -->
+        {{-- <div class="flex items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md border-2 dark:border-gray-700">
             <div class="space-y-2 w-full">
                 <h2 class="text-2xl font-semibold text-teal-600 dark:text-teal-400">{{ $tipoTramite->nombre }}</h2>
                 <p class="text-gray-700 dark:text-gray-300"><strong>Fecha de Creación:</strong>
@@ -22,6 +22,48 @@
                         d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
                 </svg>
             </button>
+        </div> --}}
+        <div class="flex flex-col gap-4 p-6 bg-white dark:bg-gray-800 border rounded-lg shadow-md dark:border-gray-700">
+            <!-- Encabezado -->
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between text-center border-b pb-4 dark:border-gray-600">
+                <h2 class="text-xl font-bold text-teal-600 dark:text-teal-400 mb-2 sm:mb-0">
+                    {{ $tipoTramite->nombre }}
+                </h2>
+                <span class="text-sm sm:text-base text-gray-500 dark:text-gray-400">
+                    {{ $tipoTramite->created_at->format('d/m/Y') }}
+                </span>
+            </div>
+
+            <!-- Detalles del tipo de trámite -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Fecha de Creación</p>
+                    <p class="text-base font-semibold text-gray-800 dark:text-gray-200">
+                        {{ $tipoTramite->created_at->format('d/m/Y') }}
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Trámites Realizados</p>
+                    <p class="text-base font-semibold text-gray-800 dark:text-gray-200">
+                        {{ $tipoTramite->tramites->count() }}
+                        {{ $tipoTramite->tramites->count() > 1 ? 'trámites' : 'trámite' }}
+                    </p>
+                </div>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="flex justify-end gap-2 pt-4 border-t dark:border-gray-600">
+                <button title="Editar el tipo de trámite" wire:click="editar({{ $tipoTramite->id }})"
+                    class="px-4 py-2 text-sm font-medium text-orange-600 rounded-lg border border-transparent hover:border-orange-600 flex items-center gap-2">
+                    <span>Editar</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                    </svg>
+                </button>
+            </div>
         </div>
 
         <!-- Espacio para estadísticas -->
@@ -42,10 +84,10 @@
                 <!-- botón para visitar la página de Trámites -->
                 <div class="flex justify-end">
                     <a href="{{ route('tramites.index') }}" wire:navigate
-                        class="flex items-center text-gray-600 dark:text-gray-400 hover:underline m-3">
+                        class="flex items-center text-teal-600 dark:text-teal-400 hover:underline">
                         <span>Ver todos los trámites</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="size-6">
+                            stroke="currentColor" class="w-5 h-5 ml-2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
                     </a>

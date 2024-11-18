@@ -6,6 +6,7 @@ use App\Models\Tramite;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use App\Models\Bitacora;
 
 class PDFController extends Controller
 {
@@ -65,6 +66,13 @@ class PDFController extends Controller
         // Generar PDF
         $reporte['nombreArchivo'] = $nombreArchivo;
         $pdf = PDF::loadView('pdf.reporte', $reporte);
+
+        // Bitacora
+        Bitacora::create([
+            'tipo' => 'reporte',
+            'descripcion' => 'El usuario: ' . auth()->user()->nombres . ', generó el ' . $nombreArchivo,
+            'user_id' => auth()->id(),
+        ]);
         
         // Descargar PDF
         return $pdf->download($nombreArchivo);

@@ -323,25 +323,23 @@ new class extends Component {
                 </template>
             </li>
             {{-- Bitacora --}}
-            {{-- @if (Auth::user()->role->nombre == 'Administrador')
+            @if (Auth::user()->role->nombre == 'Administrador')
                 <li class="relative px-6 py-3">
-                    @if (request()->routeIs('dashboard'))
+                    @if (request()->routeIs('bitacora'))
                         <span class="absolute inset-y-0 left-0 w-1 bg-teal-600 rounded-tr-lg rounded-br-lg"
                             aria-hidden="true"></span>
                     @endif
-                    <a class="inline-flex items-center w-full text-sm transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('dashboard') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
-                        href="#">
+                    <a class="inline-flex items-center w-full text-base transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('bitacora') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
+                        href="{{ route('bitacora') }}" wire:navigate>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke-width="1.5" stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
                         </svg>
-
-
                         <span class="ml-4">Bitácora</span>
                     </a>
                 </li>
-            @endif --}}
+            @endif
         </ul>
 
         {{-- Cerrar Sesión --}}
