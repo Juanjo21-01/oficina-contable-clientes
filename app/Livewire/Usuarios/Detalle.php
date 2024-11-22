@@ -5,6 +5,7 @@ namespace App\Livewire\Usuarios;
 use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class Detalle extends Component
 {
@@ -71,15 +72,51 @@ class Detalle extends Component
         $this->usuario = User::find($this->usuarioId);
         
         // Datos para la gráfica
-        $totalTramites = User::find($this->usuarioId)->tramites()->where('estado', 1)->count();
-        $totalClientes = User::find($this->usuarioId)->clientes()->where('estado', 1)->count();
+        $tramitesPorMes = $this->usuario->tramites()->selectRaw('DATE_FORMAT(fecha, "%Y-%m") as mes, COUNT(*) as cantidad')
+            ->where('fecha', '>=', Carbon::now()->subMonths(5)->startOfMonth())
+            ->groupBy('mes')
+            ->pluck('cantidad', 'mes')
+            ->toArray();
+
+        $clientesPorMes = $this->usuario->clientes()->selectRaw('DATE_FORMAT(created_at, "%Y-%m") as mes, COUNT(*) as cantidad')
+            ->where('created_at', '>=', Carbon::now()->subMonths(5)->startOfMonth())
+            ->groupBy('mes')
+            ->pluck('cantidad', 'mes')
+            ->toArray();
+
+        $tramitesData = [];
+        $clientesData = [];
+
+        // Obtener los últimos 6 meses
+        $mesesDato = collect();
+        for ($i = 5; $i >= 0; $i--) {
+            $mesesDato->push(Carbon::now()->subMonths($i)->format('Y-m'));
+        }
+        foreach ($mesesDato as $mes) {
+            $mesKey = Carbon::parse($mes)->format('Y-m');
+            $tramitesData[] = $tramitesPorMes[$mesKey] ?? 0;
+            $clientesData[] = $clientesPorMes[$mesKey] ?? 0;
+        }
+
+        $meses = collect();
+        for ($i = 5; $i >= 0; $i--) {
+            $meses->push(Carbon::now()->subMonths($i)->locale('es')->isoFormat('MMMM YYYY'));
+        }
+
         $chartData = [
-            'labels' => ['Clientes', 'Trámites'],
+            'labels' => $meses,
             'datasets' => [
                 [
-                    'label' => 'Cantidad',
-                    'backgroundColor' => ['#4FD1C5', '#F97316'],
-                    'data' => [$totalClientes, $totalTramites],
+                    'label' => 'Trámites',
+                    'backgroundColor' => 'rgba(75, 192, 192, 0.2)',
+                    'borderColor' => 'rgba(75, 192, 192, 1)',
+                    'data' => $tramitesData,
+                ],
+                [
+                    'label' => 'Clientes',
+                    'backgroundColor' => 'rgba(255, 99, 132, 0.2)',
+                    'borderColor' => 'rgba(255, 99, 132, 1)',
+                    'data' => $clientesData,
                 ],
             ],
         ];

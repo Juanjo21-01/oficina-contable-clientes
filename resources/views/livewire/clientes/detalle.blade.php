@@ -3,7 +3,8 @@
         <!-- Tarjeta de perfil del cliente -->
         <div class="flex flex-col gap-4 p-6 bg-white dark:bg-gray-800 border rounded-lg shadow-md dark:border-gray-700">
             <!-- Encabezado -->
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between text-center border-b pb-4 dark:border-gray-600">
+            <div
+                class="flex flex-col sm:flex-row sm:items-center sm:justify-between text-center border-b pb-4 dark:border-gray-600">
                 <h2 class="text-xl font-bold text-teal-600 dark:text-teal-400 mb-2 sm:mb-0">
                     {{ $cliente->nombres }} {{ $cliente->apellidos }}
                 </h2>
@@ -80,7 +81,8 @@
         <!-- Agencia Virtual -->
         <div
             class="flex flex-col gap-4 mt-4 p-6 bg-white dark:bg-gray-800 border rounded-lg shadow-md dark:border-gray-700">
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between text-center border-b pb-4 dark:border-gray-600">
+            <div
+                class="flex flex-col sm:flex-row sm:items-center sm:justify-between text-center border-b pb-4 dark:border-gray-600">
                 <h3 class="text-xl font-bold text-teal-600 dark:text-teal-400 mb-2 sm:mb-0">Agencia Virtual</h3>
                 @if ($cliente->agenciaVirtual)
                     <a href="https://farm3.sat.gob.gt/menu/login.jsf" target="_blank" rel="noopener noreferrer"
@@ -143,11 +145,14 @@
         </div>
 
         <!-- Espacio para estadísticas -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 border-2 dark:border-gray-700">
-            <h3 class="text-2xl font-semibold text-teal-600 dark:text-teal-400">Estadísticas</h3>
-            <p class="text-gray-600 dark:text-gray-300 mb-4">Gráfica de la cantidad de trámites realizados</p>
-            <div class="w-full h-64 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
-                <canvas id="myChart" class="w-full h-full"></canvas>
+        <div class="bg-white rounded-lg shadow-md p-4 dark:bg-gray-800 border-2 dark:border-gray-700">
+            <h3 class="text-2xl font-semibold text-teal-600 dark:text-teal-400 mb-2">Estadísticas</h3>
+            <div class="w-full h-96 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                <div class="w-full h-full items-center justify-center hidden sm:flex">
+                    <canvas id="myChart" class="w-full h-full "></canvas>
+                </div>
+                <span class=" text-gray-500 dark:text-gray-300 text-center inline sm:hidden">Por favor, amplía la
+                    ventana para ver la gráfica</span>
             </div>
         </div>
 
@@ -294,7 +299,6 @@
         </div>
     @endif
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
@@ -302,13 +306,17 @@
             const chartData = @json($chartData);
 
             new Chart(ctx, {
-                type: 'bar',
+                type: 'line',
                 data: chartData,
                 options: {
                     responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Cantidad de Trámites de los últimos 6 meses'
                         }
                     }
                 }

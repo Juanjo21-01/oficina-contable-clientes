@@ -5,6 +5,7 @@ namespace App\Livewire\Clientes;
 use Livewire\Component;
 use App\Models\Cliente;
 use App\Models\AgenciaVirtual;
+use Carbon\Carbon;
 
 class Detalle extends Component
 {
@@ -146,14 +147,37 @@ class Detalle extends Component
         $this->cliente = Cliente::find($this->clienteId);
 
         // Datos para la gráfica
-        $totalTramites = $this->cliente->tramites->count();
+        $tramitesPorMes = $this->cliente->tramites()->selectRaw('DATE_FORMAT(fecha, "%Y-%m") as mes, COUNT(*) as cantidad')
+            ->where('fecha', '>=', Carbon::now()->subMonths(5)->startOfMonth())
+            ->groupBy('mes')
+            ->pluck('cantidad', 'mes')
+            ->toArray();
+
+        $tramitesData = [];
+
+        // Obtener los últimos 6 meses
+        $mesesDato = collect();
+        for ($i = 5; $i >= 0; $i--) {
+            $mesesDato->push(Carbon::now()->subMonths($i)->format('Y-m'));
+        }
+        foreach ($mesesDato as $mes) {
+            $mesKey = Carbon::parse($mes)->format('Y-m');
+            $tramitesData[] = $tramitesPorMes[$mesKey] ?? 0;
+        }
+
+        $meses = collect();
+        for ($i = 5; $i >= 0; $i--) {
+            $meses->push(Carbon::now()->subMonths($i)->locale('es')->isoFormat('MMMM YYYY'));
+        }
+
         $chartData = [
-            'labels' => ['Clientes'],
+            'labels' => $meses,
             'datasets' => [
                 [
-                    'label' => 'Cantidad',
-                    'backgroundColor' => ['#4FD1C5', '#F97316'],
-                    'data' => [$totalTramites, 0],
+                    'label' => 'Trámites',
+                    'backgroundColor' => 'rgba(75, 192, 192, 0.2)',
+                    'borderColor' => 'rgba(75, 192, 192, 1)',
+                    'data' => $tramitesData,
                 ],
             ],
         ];
