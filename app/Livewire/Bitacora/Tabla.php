@@ -17,7 +17,7 @@ class Tabla extends Component
     public $bitacoraId, $password, $usuarioNombre, $tipoBitacora, $abrirModal = false;
     public $search = '';
     public $tipo = '';
-    public $perPage = 5;
+    public $perPage = 10;
 
     // Eventos
     protected $listeners = ['bitacoraGuardada' => 'render', 'bitacoraEliminada' => 'render'];

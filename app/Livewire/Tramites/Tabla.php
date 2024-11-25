@@ -19,7 +19,7 @@ class Tabla extends Component
     public $abrirModal = false;
     public $search = '';
     public $estado = '';
-    public $perPage = 5;
+    public $perPage = 10;
     
     // Eventos
     protected $listeners = ['tramiteGuardado' => 'render', 'tramiteEliminado' => 'render'];

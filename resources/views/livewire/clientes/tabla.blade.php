@@ -101,7 +101,7 @@
                             <td class="px-4 py-3 w-2/12">
                                 <div class="flex justify-center items-center space-x-1">
                                     <a title="Ver información del cliente"
-                                        href="{{ route('clientes.mostrar', $cliente->id) }}" wire:navigate
+                                        href="{{ route('clientes.mostrar', $cliente->id) }}"
                                         class="py-1 px-2 text-purple-600 rounded-lg focus:outline-none focus:shadow-outline-gray hover:border hover:border-purple-600 border border-transparent"
                                         aria-label="Ver">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

@@ -3,7 +3,8 @@
         <!-- Tarjeta de perfil del tramite -->
         <div class="flex flex-col gap-4 p-6 bg-white dark:bg-gray-800 border rounded-lg shadow-md dark:border-gray-700">
             <!-- Encabezado -->
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between text-center border-b pb-4 dark:border-gray-600">
+            <div
+                class="flex flex-col sm:flex-row sm:items-center sm:justify-between text-center border-b pb-4 dark:border-gray-600">
                 <h2 class="text-xl font-bold text-teal-600 dark:text-teal-400 mb-2 sm:mb-0">
                     {{ $tramite->cliente->nombres }} {{ $tramite->cliente->apellidos }}
                 </h2>
@@ -96,9 +97,9 @@
                 <img src="{{ asset('img/logo.png') }}" alt="Logo de la Empresa" class="mx-auto h-16 mb-2">
                 <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">Recibo de Trámite</h2>
                 <p class="text-sm text-gray-600 dark:text-gray-400">Empresa Asesoría Fiscal Contable</p>
-                <p class="text-sm text-gray-600 dark:text-gray-400">Dirección: San Marcos, San Marcos</p>
-                <p class="text-sm text-gray-600 dark:text-gray-400">Teléfono: (502) 1234-5678</p>
-                <p class="text-sm text-gray-600 dark:text-gray-400">NIT: 55448877</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Dirección: 10 calle 7-37, Local #3, Zona 1, San Marcos
+                </p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Teléfono: (502) 5164-4661</p>
                 <p class="text-sm text-gray-600 dark:text-gray-400">Fecha: {{ date('d/m/Y') }}</p>
                 <p class="text-sm text-gray-600 dark:text-gray-400">Recibo No: #{{ $tramite->id }}</p>
             </div>

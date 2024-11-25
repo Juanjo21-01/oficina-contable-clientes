@@ -68,7 +68,7 @@
                             <td class="px-4 py-3 w-4/12">
                                 <div class="flex items-center justify-center space-x-2 text-sm">
                                     <a title="Ver información del tipo de trámite"
-                                        href="{{ route('tipo-tramites.mostrar', $tipoTramite->id) }}" wire:navigate
+                                        href="{{ route('tipo-tramites.mostrar', $tipoTramite->id) }}"
                                         class="flex justify-center items-center gap-2 font-semibold py-1 px-2 text-purple-600 rounded-lg focus:outline-none focus:shadow-outline-gray hover:border hover:border-purple-600 border border-transparent"
                                         aria-label="Ver">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

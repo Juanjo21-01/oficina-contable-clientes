@@ -91,8 +91,8 @@
                 <td style="text-align: center; width: 80%;">
                     <h2>Recibo de Trámite</h2>
                     <p>Asesoría Fiscal Contable</p>
-                    <p>San Marcos, San Marcos</p>
-                    <p>Teléfono: 1234-5678</p>
+                    <p>10 calle 7-37, Local #3, Zona 1, San Marcos</p>
+                    <p>Teléfono: 5164-4661</p>
                     <p>Fecha: {{ date('d/m/Y') }}</p>
                     <p>Recibo No: #{{ $tramite->id }}</p>
                 </td>

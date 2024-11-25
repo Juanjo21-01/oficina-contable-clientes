@@ -101,7 +101,7 @@ class PDFController extends Controller
     {
         $inicioSemana = Carbon::now()->startOfWeek();
         $finSemana = Carbon::now()->endOfWeek();
-        $query = Tramite::whereBetween('fecha', [$inicioSemana, $finSemana]);
+        $query = Tramite::where('estado', 1)->whereBetween('fecha', [$inicioSemana, $finSemana]);
         return $this->aplicarFiltros($query, $tipoTramiteId, $clienteId);
     }
 
@@ -109,7 +109,7 @@ class PDFController extends Controller
     {
         $inicioMes = Carbon::now()->startOfMonth();
         $finMes = Carbon::now()->endOfMonth();
-        $query = Tramite::whereBetween('fecha', [$inicioMes, $finMes]);
+        $query = Tramite::where('estado', 1)->whereBetween('fecha', [$inicioMes, $finMes]);
         return $this->aplicarFiltros($query, $tipoTramiteId, $clienteId);
     }
 
@@ -118,7 +118,7 @@ class PDFController extends Controller
         if ($fechaInicio && $fechaFin) {
             $inicio = Carbon::parse($fechaInicio)->startOfDay();
             $fin = Carbon::parse($fechaFin)->endOfDay();
-            $query = Tramite::whereBetween('fecha', [$inicio, $fin]);
+            $query = Tramite::where('estado', 1)->whereBetween('fecha', [$inicio, $fin]);
             return $this->aplicarFiltros($query, $tipoTramiteId, $clienteId);
         }
         return collect();
@@ -136,6 +136,8 @@ class PDFController extends Controller
         return [
             'tramites' => $tramites,
             'totalTramites' => $tramites->count(),
+            'totalPrecio' => $tramites->sum('precio'),
+            'totalGastos' => $tramites->sum('gastos'),
             'gastoTotal' => $tramites->sum('precio') - $tramites->sum('gastos'),
             'promedioGasto' => $tramites->count() > 0 ? ($tramites->sum('precio') - $tramites->sum('gastos')) / $tramites->count() : 0,
         ];

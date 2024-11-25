@@ -24,7 +24,7 @@ new class extends Component {
     <!-- Mobile sidebar -->
     <div class="py-4 text-zinc-500 dark:text-zinc-400">
         <!-- Logo -->
-        <a wire:navigate href="{{ route('dashboard') }}">
+        <a href="{{ route('dashboard') }}">
             <img src="/img/logo.png" alt="Logo AFC" class="w-20 mx-auto">
         </a>
 
@@ -35,7 +35,7 @@ new class extends Component {
                         aria-hidden="true"></span>
                 @endif
                 <a class="inline-flex items-center w-full text-sm transition-colors duration-150 hover:text-zinc-800 dark:hover:text-zinc-200 {{ request()->routeIs('dashboard') ? 'text-teal-600 font-bold' : 'font-semibold' }}"
-                    href="{{ route('dashboard') }}" wire:navigate>
+                    href="{{ route('dashboard') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"

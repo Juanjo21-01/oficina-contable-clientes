@@ -53,7 +53,7 @@
         .section-title {
             font-weight: 700;
             font-size: 16px;
-            margin-bottom: 3px;
+            margin-bottom: 8px;
             color: #374151;
         }
 
@@ -69,15 +69,25 @@
             border-collapse: collapse;
         }
 
+        .details-table th,
+        .details-table td {
+            border: 1px solid #D1D5DB;
+            padding: 5px;
+            color: #4b5563;
+        }
+
         .details-table th {
-            text-align: left;
+            text-align: center;
             padding-bottom: 8px;
             color: #4b5563;
         }
 
         .details-table td {
-            padding: 5px 0;
-            color: #4b5563;
+            font-size: 13px;
+        }
+
+        .details-table td:last-child {
+            text-align: right;
         }
 
         .details-table td:last-child {
@@ -109,6 +119,49 @@
             width: 33%;
             padding: 8px;
         }
+
+
+        /* No. */
+        .details-table th:nth-child(1),
+        .details-table td:nth-child(1) {
+            width: 5%;
+        }
+
+        /* Cliente */
+        .details-table th:nth-child(2),
+        .details-table td:nth-child(2) {
+            width: 20%;
+        }
+
+        /* Tipo de Trámite */
+        .details-table th:nth-child(3),
+        .details-table td:nth-child(3) {
+            width: 21%;
+        }
+
+        /* Fecha */
+        .details-table th:nth-child(4),
+        .details-table td:nth-child(4) {
+            width: 12%;
+        }
+
+        /* Precio */
+        .details-table th:nth-child(5),
+        .details-table td:nth-child(5) {
+            width: 14%;
+        }
+
+        /* Gastos */
+        .details-table th:nth-child(6),
+        .details-table td:nth-child(6) {
+            width: 14%;
+        }
+
+        /* Total */
+        .details-table th:nth-child(7),
+        .details-table td:nth-child(7) {
+            width: 14%;
+        }
     </style>
 </head>
 
@@ -123,8 +176,8 @@
                 <td style="text-align: center; width: 80%;">
                     <h2>Reporte de Trámites</h2>
                     <p>Asesoría Fiscal Contable</p>
-                    <p>San Marcos, San Marcos</p>
-                    <p>Teléfono: 1234-5678</p>
+                    <p>10 calle 7-37, Local #3, Zona 1, San Marcos</p>
+                    <p>Teléfono: 5164-4661</p>
                     <p>Fecha: {{ date('d/m/Y') }}</p>
                 </td>
             </tr>
@@ -167,16 +220,17 @@
                         <th>Cliente</th>
                         <th>Tipo de Trámite</th>
                         <th>Fecha</th>
-                        <th style="text-align: right;">Precio</th>
-                        <th style="text-align: right;">Gastos</th>
-                        <th style="text-align: right;">Total</th>
+                        <th>Precio</th>
+                        <th>Gastos</th>
+                        <th>Total</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($tramites as $tramite)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $tramite->cliente->nombres }}</td>
+                            <td style="text-align: center;">{{ $loop->iteration }}</td>
+                            <td>{{ $tramite->cliente->nombres }}
+                                {{ $tramite->cliente->apellidos }}</td>
                             <td>{{ $tramite->tipoTramite->nombre }}</td>
                             <td>{{ date('d/m/Y', strtotime($tramite->fecha)) }}</td>
                             <td style="text-align: right;">Q. {{ number_format($tramite->precio, 2) }}</td>
@@ -186,6 +240,14 @@
                         </tr>
                     @endforeach
                 </tbody>
+                <tfoot style="font-weight: bold">
+                    <tr>
+                        <td colspan="4" style="text-align: center; width: 58%;">TOTALES</td>
+                        <td style="text-align: right; width: 14%;">Q. {{ number_format($totalPrecio, 2) }}</td>
+                        <td style="text-align: right; width: 14%;">Q. {{ number_format($totalGastos, 2) }}</td>
+                        <td style="text-align: right; width: 14%;">Q. {{ number_format($gastoTotal, 2) }}</td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>

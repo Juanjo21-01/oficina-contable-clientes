@@ -33,10 +33,10 @@
                         <x-input-label for="perPage" :value="__('Mostrar')" />
                         <select wire:model.live="perPage" id="perPage"
                             class="block w-full mt-1 pl-3 pr-7 py-1 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:border-teal-400 dark:focus:border-teal-600 focus:outline-none focus:shadow-outline-teal rounded-md shadow-sm form-select">
-                            <option value="5">5</option>
                             <option value="10">10</option>
-                            <option value="15">15</option>
                             <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="75">75</option>
                         </select>
                     </div>
                 </div>
