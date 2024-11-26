@@ -15,7 +15,15 @@ class DashboardController extends Controller
         // total de tramites y clientes, siempre y cuando estén activos
         $totalTramites = Tramite::where('estado', 1)->count();
         $totalClientes = Cliente::where('estado', 1)->count();
-        $gastoTotal = Tramite::sum('precio') - Tramite::sum('gastos');
+
+        // Calcular el gasto total del último mes
+        $inicioMes = Carbon::now()->startOfMonth();
+        $finMes = Carbon::now()->endOfMonth();
+        $gastoTotal = Tramite::where('estado', 1)
+            ->whereBetween('fecha', [$inicioMes, $finMes])
+            ->sum('precio') - Tramite::where('estado', 1)
+            ->whereBetween('fecha', [$inicioMes, $finMes])
+            ->sum('gastos');
 
         // Últimos registros de tramites y clientes
         $ultimosTramites = Tramite::with(['cliente:id,nombres,apellidos', 'tipoTramite:id,nombre'])

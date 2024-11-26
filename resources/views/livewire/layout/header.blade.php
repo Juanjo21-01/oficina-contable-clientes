@@ -16,7 +16,8 @@ new class extends Component {
 }; ?>
 
 <header class="z-10 py-4 bg-white shadow-md dark:bg-gray-800">
-    <div class="container flex items-center justify-between h-full px-6 mx-auto text-teal-600 dark:text-teal-300">
+    <div
+        class="container flex items-center justify-between lg:justify-end h-full px-6 mx-auto text-teal-600 dark:text-teal-300">
         <!-- Mobile hamburger -->
         <button class="p-1 mr-5 -ml-1 rounded-md lg:hidden focus:outline-none focus:shadow-outline-teal"
             @click="toggleSideMenu" aria-label="Menu">
@@ -26,22 +27,6 @@ new class extends Component {
                     clip-rule="evenodd"></path>
             </svg>
         </button>
-
-        <!-- Search input -->
-        <div class="hidden md:flex justify-center flex-1 lg:mr-32">
-            {{-- <div class="relative w-full max-w-xl mr-6 focus-within:text-teal-500">
-                <div class="absolute inset-y-0 flex items-center pl-2">
-                    <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd"
-                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </div>
-                <input
-                    class="w-full pl-8 pr-2 text-sm text-zinc-700 placeholder-zinc-600 bg-gray-100 border-0 rounded-md dark:placeholder-zinc-500 dark:focus:shadow-outline-zinc dark:focus:placeholder-zinc-600 dark:bg-gray-700 dark:text-zinc-200 focus:placeholder-zinc-500  focus:border-teal-300 focus:outline-none focus:shadow-outline-teal form-input"
-                    type="text" placeholder="Buscar trámites" aria-label="Search" />
-            </div> --}}
-        </div>
 
         <!-- Enlaces -->
         <ul class="flex items-center flex-shrink-0 space-x-6">
@@ -85,7 +70,16 @@ new class extends Component {
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile')" wire:navigate>
+                        <x-dropdown-link :href="asset('manual/Manual de Usuario.pdf')" class="hover:text-amber-600" target="_blank"
+                            rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-5 mr-3">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+                            </svg>
+                            <span>Manual</span>
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('profile')" wire:navigate class="hover:text-teal-600">
                             <svg class="size-5 mr-3" aria-hidden="true" fill="none" stroke-linecap="round"
                                 stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                                 <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z">

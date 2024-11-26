@@ -82,29 +82,34 @@
     </script>
 </head>
 
-<body class="overflow-hidden">
-    <div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
-        <!-- Navegación -->
-        <livewire:layout.navigation />
-        <!-- Backdrop -->
-        <div x-show="isSideMenuOpen" x-transition:enter="transition ease-in-out duration-150"
-            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-            x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0"
-            class="fixed inset-0 z-10 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center"></div>
-        <livewire:layout.navigationMobile />
+<body class="overflow-hidden h-screen" :class="{ 'overflow-hidden': isSideMenuOpen }">
+    <div class="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
+        <div class="flex flex-1">
+            <!-- Navegación -->
+            <livewire:layout.navigation />
+            <!-- Backdrop -->
+            <div x-show="isSideMenuOpen" x-transition:enter="transition ease-in-out duration-150"
+                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
+                class="fixed inset-0 z-10 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center">
+            </div>
+            <livewire:layout.navigationMobile />
 
-        <div class="flex flex-col flex-1 w-full overflow-hidden">
-            <!-- Encabezado -->
-            <livewire:layout.header />
+            <div class="flex flex-col flex-1 w-full overflow-hidden">
+                <!-- Encabezado -->
+                <livewire:layout.header />
 
-            <!-- Contenido -->
-            <main class="h-full overflow-y-auto">
-                <div class="container px-6 mx-auto">
-                    {{ $slot }}
-                </div>
-            </main>
+                <!-- Contenido -->
+                <main class="h-full overflow-y-auto flex-grow">
+                    <div class="container px-6 mx-auto">
+                        {{ $slot }}
+                    </div>
+                </main>
+            </div>
         </div>
+        <!-- Footer -->
+        @include('layouts.footer')
     </div>
 </body>
 

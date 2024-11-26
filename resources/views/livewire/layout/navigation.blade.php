@@ -350,5 +350,17 @@ new class extends Component {
                 <span>Cerrar Sesión</span>
             </button>
         </div>
-    </div>
+
+        {{-- Manual de Usuario --}}
+        <div class="px-4 py-6 mt-11 flex justify-center">
+            <a href="{{ asset('manual/Manual de Usuario.pdf') }}" target="_blank" rel="noopener noreferrer"
+                class="w-2/4 flex items-center justify-evenly px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-amber-600 border border-transparent rounded-xl active:bg-amber-600 hover:bg-amber-700 focus:outline-none focus:shadow-outline-amber">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+                </svg>
+                <span class="ml-2">Manual</span>
+            </a>
+        </div>
 </aside>
